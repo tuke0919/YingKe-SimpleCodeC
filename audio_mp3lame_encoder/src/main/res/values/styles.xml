@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SpectrumView">
+        <attr name="rectangle_color" format="color" />
+        <attr name="rectangle_num" format="integer" />
+        <attr name="rectangle_width" format="dimension" />
+        <attr name="rectangle_speed" format="integer" />
+    </declare-styleable>
+
+</resources>

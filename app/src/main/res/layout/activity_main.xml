@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/info_tv"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:gravity="center"
+                android:text="开发功能单元测试"
+                android:textColor="#333333"
+                android:textStyle="bold"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/textView00"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:text="音频：Mp3Lame编码"
+                android:gravity="left|center_vertical"
+                android:textColor="#333333"
+                android:background="@drawable/bg_debug_btn"
+                android:paddingLeft="10dp"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

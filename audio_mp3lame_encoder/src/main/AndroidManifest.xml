@@ -1,0 +1,17 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.yingke.audio.mp3lame.encoder" >
+
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true">
+        <activity
+            android:name=".LameEncoderActivity"
+            android:label="@string/module_name"
+            android:screenOrientation="portrait"
+            >
+        </activity>
+    </application>
+</manifest>

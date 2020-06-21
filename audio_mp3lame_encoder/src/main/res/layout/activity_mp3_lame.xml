@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/start_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Start" />
+
+        <Button
+            android:id="@+id/stop_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Stop" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_resume"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_pause"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="pasuseRecord" />
+
+        <Button
+            android:id="@+id/btn_resume"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="resume" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/StatusTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <com.yingke.audio.mp3lame.encoder.view.SpectrumView
+        android:id="@+id/spectrum_view"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        app:rectangle_color="#FF6565"
+        app:rectangle_num="10"
+        app:rectangle_width="5dp" />
+
+    <com.yingke.audio.mp3lame.encoder.view.RecorderView
+        android:id="@+id/mic_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </com.yingke.audio.mp3lame.encoder.view.RecorderView>
+</LinearLayout>

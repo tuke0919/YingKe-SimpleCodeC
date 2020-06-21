@@ -1,0 +1,2 @@
+include ':app', ':audio_mp3lame_encoder'
+rootProject.name='YingKe-SimpleCodeC'
