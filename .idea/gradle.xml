@@ -9,6 +9,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/audio_faac_encoder" />
             <option value="$PROJECT_DIR$/audio_mp3lame_encoder" />
           </set>
         </option>
