@@ -1,21 +1,47 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
+    // 构建版本
     compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+
+    // 默认的配置
     defaultConfig {
-        applicationId "com.yingke.simple.codec"
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode rootProject.ext.android.versionCode
         versionName rootProject.ext.android.versionName
+        externalNativeBuild {
+            cmake {
+                cppFlags ""
+            }
+            ndk {
+                abiFilters "armeabi-v7a"
+            }
+        }
+
+        sourceSets {
+            main {
+                // so库地址
+                jniLibs.srcDirs = ['libs']
+            }
+        }
     }
 
     buildTypes {
-        release {
+        debug {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
         }
     }
 }
@@ -27,8 +53,6 @@ dependencies {
     implementation rootProject.ext.libraries.androidx_core
     implementation rootProject.ext.libraries.androidx_constraint
 
-    implementation project(path: ':audio_mp3lame_encoder')
-    implementation project(path: ':audio_faac_encoder')
-
+    implementation rootProject.ext.libraries.permision_lib
 
 }
