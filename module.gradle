@@ -52,7 +52,7 @@ dependencies {
     implementation rootProject.ext.libraries.androidx_appcompat
     implementation rootProject.ext.libraries.androidx_core
     implementation rootProject.ext.libraries.androidx_constraint
-
     implementation rootProject.ext.libraries.permision_lib
+    implementation project(path: ':core')
 
 }

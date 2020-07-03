@@ -1,2 +1,2 @@
-include ':app', ':audio_mp3lame_encoder', ':audio_faac_encoder'
+include ':app', ':audio_mp3lame_encoder', ':audio_faac_encoder', ':ffmpeg_single', ':core'
 rootProject.name='YingKe-SimpleCodeC'

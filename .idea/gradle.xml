@@ -11,6 +11,8 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/audio_faac_encoder" />
             <option value="$PROJECT_DIR$/audio_mp3lame_encoder" />
+            <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/ffmpeg_single" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

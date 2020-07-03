@@ -13,7 +13,8 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
-import com.yingke.audio.mp3lame.encoder.R;
+
+import com.yingke.audio.faac.encoder.R;
 
 import java.util.ArrayList;
 import java.util.List;

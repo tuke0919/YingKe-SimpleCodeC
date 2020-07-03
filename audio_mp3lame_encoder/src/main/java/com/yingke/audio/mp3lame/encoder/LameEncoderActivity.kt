@@ -1,16 +1,11 @@
 package com.yingke.audio.mp3lame.encoder
 
-import android.Manifest
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import com.yingke.audio.mp3lame.encoder.recorder.Mp3Recorder
 import com.yingke.audio.mp3lame.encoder.view.RecorderView
 import com.yingke.audio.mp3lame.encoder.view.SpectrumView
@@ -29,7 +24,7 @@ import java.lang.Exception
  * 最后修改人：无
  * <p>
  */
-class LameEncoderActivity: BaseActivity() {
+class LameEncoderActivity: BasePermissionActivity() {
 
     companion object{
         const val TAG = "LameEncoderActivity"

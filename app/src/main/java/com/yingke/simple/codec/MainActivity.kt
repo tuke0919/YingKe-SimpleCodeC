@@ -1,11 +1,11 @@
 package com.yingke.simple.codec
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
 import com.yingke.audio.mp3lame.encoder.LameEncoderActivity
+import com.yingke.core.base.BaseActivity
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     private var textView00: TextView? = null
 

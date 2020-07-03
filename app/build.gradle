@@ -27,8 +27,12 @@ dependencies {
     implementation rootProject.ext.libraries.androidx_core
     implementation rootProject.ext.libraries.androidx_constraint
 
+    implementation project(path: ':core')
+
     implementation project(path: ':audio_mp3lame_encoder')
     implementation project(path: ':audio_faac_encoder')
+
+
 
 
 }

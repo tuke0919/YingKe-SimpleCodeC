@@ -11,7 +11,8 @@ import android.graphics.SweepGradient;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.yingke.audio.mp3lame.encoder.R;
+
+import com.yingke.audio.faac.encoder.R;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
