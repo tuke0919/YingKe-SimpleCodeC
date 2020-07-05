@@ -9,6 +9,7 @@ import android.widget.Toast
 import com.yingke.audio.mp3lame.encoder.recorder.Mp3Recorder
 import com.yingke.audio.mp3lame.encoder.view.RecorderView
 import com.yingke.audio.mp3lame.encoder.view.SpectrumView
+import com.yingke.core.util.FileUtil
 import java.io.File
 import java.io.IOException
 import java.lang.Exception
@@ -56,7 +57,7 @@ class LameEncoderActivity: BasePermissionActivity() {
     }
 
     private fun initData(){
-        filePath = getExternalFilesDir(null).absolutePath + "/test.mp3"
+        filePath = FileUtil.getsExternalFilesPath() + "/test.mp3"
         recorder = Mp3Recorder()
         createFile()
     }

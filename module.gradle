@@ -48,11 +48,20 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation rootProject.ext.libraries.kotlin_lib
-    implementation rootProject.ext.libraries.androidx_appcompat
-    implementation rootProject.ext.libraries.androidx_core
-    implementation rootProject.ext.libraries.androidx_constraint
-    implementation rootProject.ext.libraries.permision_lib
-    implementation project(path: ':core')
+    compileOnly rootProject.ext.libraries.kotlin_lib
+    compileOnly rootProject.ext.libraries.androidx_appcompat
+    compileOnly rootProject.ext.libraries.androidx_core
+
+    compileOnly rootProject.ext.libraries.androidx_fragment
+    compileOnly rootProject.ext.libraries.androidx_media
+    compileOnly rootProject.ext.libraries.androidx_list
+    compileOnly rootProject.ext.libraries.androidx_multidex
+
+    compileOnly rootProject.ext.libraries.android_bolts
+
+    compileOnly rootProject.ext.libraries.androidx_constraint
+    compileOnly rootProject.ext.libraries.permision_lib
+
+    compileOnly project(path: ':core')
 
 }

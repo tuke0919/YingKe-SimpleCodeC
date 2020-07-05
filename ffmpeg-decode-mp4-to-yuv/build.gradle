@@ -1,0 +1,7 @@
+apply from: '../module.gradle'
+
+dependencies {
+    compileOnly project(path: ':ffmpeg_assets')
+    compileOnly project(path: ':ffmpeg_single')
+
+}

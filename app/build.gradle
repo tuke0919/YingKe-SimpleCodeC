@@ -18,6 +18,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    sourceSets {
+        main {
+            // so库地址
+            jniLibs.srcDirs = ['libs']
+        }
+    }
 }
 
 dependencies {
@@ -25,12 +32,26 @@ dependencies {
     implementation rootProject.ext.libraries.kotlin_lib
     implementation rootProject.ext.libraries.androidx_appcompat
     implementation rootProject.ext.libraries.androidx_core
+
+    implementation rootProject.ext.libraries.androidx_fragment
+    implementation rootProject.ext.libraries.androidx_media
+    implementation rootProject.ext.libraries.androidx_list
+    implementation rootProject.ext.libraries.androidx_multidex
+
+    implementation rootProject.ext.libraries.android_bolts
+
     implementation rootProject.ext.libraries.androidx_constraint
+    implementation rootProject.ext.libraries.permision_lib
 
     implementation project(path: ':core')
+    implementation project(path: ':ffmpeg_assets')
+    implementation project(path: ':ffmpeg_single')
 
     implementation project(path: ':audio_mp3lame_encoder')
     implementation project(path: ':audio_faac_encoder')
+
+    implementation project(path: ':ffmpeg-decode-mp4-to-yuv')
+
 
 
 

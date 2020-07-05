@@ -12,7 +12,14 @@ ext {
 
     libraries = [
             androidx_appcompat  : 'androidx.appcompat:appcompat:1.0.2',
-            androidx_core       : 'androidx.core:core-ktx:1.3.0',
+            androidx_core       : 'androidx.core:core:1.0.0',
+            androidx_fragment   : 'androidx.fragment:fragment:1.0.0',
+            androidx_media      : 'androidx.media:media:1.0.0',
+            androidx_list       : 'androidx.recyclerview:recyclerview:1.0.0',
+            androidx_multidex   : 'androidx.multidex:multidex:2.0.0',
+            android_bolts       : 'com.parse.bolts:bolts-tasks:1.4.0',
+
+            androidx_core_ktx   : 'androidx.core:core-ktx:1.3.0',
             androidx_constraint : 'androidx.constraintlayout:constraintlayout:1.1.3',
             rxjava      : 'io.reactivex.rxjava2:rxjava:2.2.0',
             rxandroid   : 'io.reactivex.rxjava2:rxandroid:2.1.0',

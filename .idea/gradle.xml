@@ -12,6 +12,8 @@
             <option value="$PROJECT_DIR$/audio_faac_encoder" />
             <option value="$PROJECT_DIR$/audio_mp3lame_encoder" />
             <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/ffmpeg-decode-mp4-to-yuv" />
+            <option value="$PROJECT_DIR$/ffmpeg_assets" />
             <option value="$PROJECT_DIR$/ffmpeg_single" />
           </set>
         </option>

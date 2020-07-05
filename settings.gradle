@@ -1,2 +1,12 @@
-include ':app', ':audio_mp3lame_encoder', ':audio_faac_encoder', ':ffmpeg_single', ':core'
+include ':app'
+include ':ffmpeg-decode-mp4-to-yuv'
+include ':audio_mp3lame_encoder'
+include ':audio_faac_encoder'
+// 核心组件
+include':core'
+// ffmpeg so
+include ':ffmpeg_single'
+// 资源
+include ':ffmpeg_assets'
+
 rootProject.name='YingKe-SimpleCodeC'
