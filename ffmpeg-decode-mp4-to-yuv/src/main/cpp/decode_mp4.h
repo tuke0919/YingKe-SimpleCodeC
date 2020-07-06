@@ -20,7 +20,7 @@ extern "C"{
 };
 #endif
 
-class Mp4Decoder: public VideoDecoder {
+class Mp4ToYuvDecoder: public VideoDecoder {
 
 private:
 

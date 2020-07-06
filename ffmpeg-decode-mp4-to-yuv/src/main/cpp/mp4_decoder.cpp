@@ -11,7 +11,7 @@ extern "C"
 JNIEXPORT jint JNICALL
 decodeMp4(JNIEnv *env, jobject thiz, jstring mp4_path, jstring yuv_path){
     // 实例化 解码器
-    VideoDecoder *mp4Decoder = new Mp4Decoder();
+    VideoDecoder *mp4Decoder = new Mp4ToYuvDecoder();
 
     const char *mp4Path = env->GetStringUTFChars(mp4_path, NULL);
     const char *yuvPath = env->GetStringUTFChars(yuv_path, NULL);
@@ -31,11 +31,11 @@ decodeMp4(JNIEnv *env, jobject thiz, jstring mp4_path, jstring yuv_path){
  * 动态注册
  * 1, 添加 java方法和 jni方法对应
  * */
-JNINativeMethod method[] = {
-        {"decode", "(Ljava/lang/String;Ljava/lang/String)I", (void *)(decodeMp4)}
+static JNINativeMethod method[] = {
+        {"decode", "(Ljava/lang/String;Ljava/lang/String;)I", (void *)(decodeMp4)}
 };
 
-jint registerNativeMethod(JNIEnv *env){
+static jint registerNativeMethod(JNIEnv *env){
     jclass cl = env->FindClass("com/yingke/decode/mp4/Mp4Decoder");
     // 3，调用RegisterNatives方法
     if ((env->RegisterNatives(cl, method, sizeof(method) / sizeof(method[0]))) < 0){
@@ -51,7 +51,7 @@ jint registerNativeMethod(JNIEnv *env){
  * @param reserved
  * @return
  */
-jint JNI_OnLoad(JavaVM *vm, void *reserved){
+JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *reserved){
     JNIEnv *env = NULL;
     if (vm->GetEnv((void **) &env, JNI_VERSION_1_6) != JNI_OK) {
         return -1;

@@ -7,10 +7,10 @@
 #include "decode_mp4.h"
 #include "logger.h"
 
-int Mp4Decoder::initDecoder(const char *video_path) {
+int Mp4ToYuvDecoder::initDecoder(const char *video_path) {
 
     // 1, 注册所有组件
-    avcodec_register_all();
+    av_register_all();
     // 2, 创建AVFormatContext结构体
     pFormatContext = avformat_alloc_context();
     // 3, 打开一个输出文件
@@ -91,7 +91,7 @@ int Mp4Decoder::initDecoder(const char *video_path) {
  * @param pFrame
  * @return
  */
-int Mp4Decoder::DecodePacket(AVCodecContext *pCodecCtx, AVPacket *pAvPacket, AVFrame *pFrame) {
+int Mp4ToYuvDecoder::DecodePacket(AVCodecContext *pCodecCtx, AVPacket *pAvPacket, AVFrame *pFrame) {
     // 向解码器 输出 packet数据
     int result = avcodec_send_packet(pCodecCtx, pAvPacket);
     if (result < 0) {
@@ -134,7 +134,7 @@ int Mp4Decoder::DecodePacket(AVCodecContext *pCodecCtx, AVPacket *pAvPacket, AVF
  * @param  yuv_path
  * @return
  */
-int Mp4Decoder::decodeFile(const char *yuv_path) {
+int Mp4ToYuvDecoder::decodeFile(const char *yuv_path) {
     // 打开文件
     yuv_file = fopen(yuv_path, "wb+");
     if (yuv_file == NULL) {

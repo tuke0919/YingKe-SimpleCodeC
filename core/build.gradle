@@ -16,6 +16,13 @@ android {
         }
     }
 
+    sourceSets {
+        main {
+            // so库地址
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
 }
 
 dependencies {
