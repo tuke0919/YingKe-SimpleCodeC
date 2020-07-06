@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -33,6 +34,8 @@ public class Mp4DecoderActivity extends BaseActivity implements AssetsTask.Callb
 
     private Mp4Decoder mp4Decoder;
     private Button button;
+    private TextView inputTv;
+    private TextView outputTv;
     private String mp4Path;
 
     public static void start(Context context){
@@ -45,6 +48,8 @@ public class Mp4DecoderActivity extends BaseActivity implements AssetsTask.Callb
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_mp4_decoder);
         button = findViewById(R.id.button);
+        inputTv = findViewById(R.id.input_path);
+        outputTv = findViewById(R.id.output_path);
         button.setEnabled(false);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,6 +62,8 @@ public class Mp4DecoderActivity extends BaseActivity implements AssetsTask.Callb
                 if (mp4Decoder == null) {
                     mp4Decoder = new Mp4Decoder();
                 }
+                button.setEnabled(false);
+
                 Task.callInBackground(new Callable<Boolean>() {
                     @Override
                     public Boolean call() throws Exception {
@@ -68,6 +75,9 @@ public class Mp4DecoderActivity extends BaseActivity implements AssetsTask.Callb
                     @Override
                     public Object then(Task<Boolean> task) throws Exception {
                         boolean success = task.getResult();
+                        button.setEnabled(true);
+                        String output = FileUtil.getsExternalFilesPath() + "/" + "output.yuv";
+                        outputTv.setText("yuv路径：" + output);
                         Toast.makeText(Mp4DecoderActivity.this, success ? "解码成功" : "解码失败", Toast.LENGTH_SHORT).show();
                         return null;
                     }
@@ -87,5 +97,6 @@ public class Mp4DecoderActivity extends BaseActivity implements AssetsTask.Callb
     public void onSuccess(String filePath) {
         button.setEnabled(true);
         mp4Path = filePath;
+        inputTv.setText("mp4路径：" + mp4Path);
     }
 }

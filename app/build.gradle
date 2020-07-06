@@ -14,6 +14,7 @@ android {
 
     buildTypes {
         debug {
+            // https://blog.csdn.net/weitangzhu_2008/article/details/103600689
             ndk {
                 abiFilters "armeabi-v7a"
             }
