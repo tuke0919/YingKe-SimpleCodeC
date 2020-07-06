@@ -43,18 +43,6 @@ class AACRecorder : Recorder{
         const val DEFAULT_CHANNEL_CONFIG = AudioFormat.CHANNEL_IN_MONO
         const val DEFAULT_AUDIO_FORMAT = AudioFormat.ENCODING_PCM_16BIT
 
-        //======================Lame Default Settings=====================
-        const val DEFAULT_LAME_MP3_QUALITY = 7
-
-        /**
-         * 与DEFAULT_CHANNEL_CONFIG相关，因为是mono单声，所以是1
-         */
-        const val DEFAULT_LAME_IN_CHANNEL = 1
-
-        /**
-         * Encoded bit rate. MP3 file will be encoded with bit rate 32kbps
-         */
-        const val DEFAULT_LAME_MP3_BIT_RATE = 32
 
         /**
          * 自定义 每160帧(采样)作为一个周期，通知一下需要进行编码
