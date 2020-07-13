@@ -61,6 +61,7 @@ dependencies {
     implementation project(path: ':audio_faac_encoder')
 
     implementation project(path: ':ffmpeg-decode-mp4-to-yuv')
+    implementation project(path: ':ffmpeg-demuxer-mp4-to-h264-aac')
 
 
 

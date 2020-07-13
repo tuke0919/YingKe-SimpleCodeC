@@ -1,0 +1,3 @@
+<resources>
+    <string name="ffmpeg_demuxer">ffmpeg-demuxer-mp4-to-h264-aac</string>
+</resources>

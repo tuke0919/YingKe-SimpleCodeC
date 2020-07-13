@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 import com.yingke.audio.mp3lame.encoder.LameEncoderActivity;
 import com.yingke.core.base.BaseActivity;
 import com.yingke.decode.mp4.Mp4DecoderActivity;
+import com.yingke.ffmpeg.demuxer.Mp4DemuxerActivity;
 
 /**
  * 功能：
@@ -25,6 +26,7 @@ public class MainActivity1 extends BaseActivity {
     private TextView textView00;
     private TextView textView01;
     private TextView textView02;
+    private TextView textView03;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,6 +40,7 @@ public class MainActivity1 extends BaseActivity {
         textView00 = findViewById(R.id.textView00);
         textView01 = findViewById(R.id.textView01);
         textView02 = findViewById(R.id.textView02);
+        textView03 = findViewById(R.id.textView03);
     }
 
     private void initListener(){
@@ -59,6 +62,13 @@ public class MainActivity1 extends BaseActivity {
             @Override
             public void onClick(View v) {
                 Mp4DecoderActivity.start(MainActivity1.this);
+            }
+        });
+
+        textView03.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Mp4DemuxerActivity.start(MainActivity1.this);
             }
         });
     }

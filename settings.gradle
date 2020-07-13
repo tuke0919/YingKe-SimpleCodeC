@@ -1,4 +1,4 @@
-include ':app'
+include ':app', ':ffmpeg-demuxer-mp4-to-h264-aac'
 include ':ffmpeg-decode-mp4-to-yuv'
 include ':audio_mp3lame_encoder'
 include ':audio_faac_encoder'
