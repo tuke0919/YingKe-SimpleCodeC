@@ -12,6 +12,7 @@
             <option value="$PROJECT_DIR$/audio_faac_encoder" />
             <option value="$PROJECT_DIR$/audio_mp3lame_encoder" />
             <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/ffmpeg-decode-mp4-native-player" />
             <option value="$PROJECT_DIR$/ffmpeg-decode-mp4-to-yuv" />
             <option value="$PROJECT_DIR$/ffmpeg-demuxer-mp4-to-h264-aac" />
             <option value="$PROJECT_DIR$/ffmpeg-muxer-h264-aac-to-mp4" />
