@@ -1,0 +1,3 @@
+<resources>
+    <string name="ffmpeg_muxer">ffmpeg-muxer-h264-aac-to-mp4</string>
+</resources>

@@ -1,0 +1,12 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.yingke.ffmpeg.muxer" >
+
+
+
+    <application>
+        <activity
+            android:name=".Mp4MuxerActivity"
+            android:label="@string/ffmpeg_muxer"
+            />
+    </application>
+</manifest>

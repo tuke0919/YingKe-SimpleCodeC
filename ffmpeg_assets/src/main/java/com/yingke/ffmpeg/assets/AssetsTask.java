@@ -22,11 +22,12 @@ import java.lang.ref.WeakReference;
  * 最后修改人：无
  * <p>
  */
-public class AssetsTask extends AsyncTask<Void, Void, String> {
+public class AssetsTask extends AsyncTask<Void, Void, String[]> {
 
 
     private WeakReference<Context> weakContext;
     private String[] fileNames;
+    private String[] filePaths;
     private Callback callback;
 
     public AssetsTask context(Context context) {
@@ -36,6 +37,7 @@ public class AssetsTask extends AsyncTask<Void, Void, String> {
 
     public AssetsTask files(String... fileNameParams){
         fileNames = new String[fileNameParams.length];
+        filePaths = new String[fileNameParams.length];
         for (int i = 0; i <  fileNameParams.length; i++) {
             fileNames[i]  = fileNameParams[i];
         }
@@ -48,14 +50,15 @@ public class AssetsTask extends AsyncTask<Void, Void, String> {
     }
 
     @Override
-    protected String doInBackground(Void... voids) {
+    protected String[] doInBackground(Void... voids) {
         InputStream inputStream = null;
         FileOutputStream fos = null;
         File targetFile = null;
         try {
             Context appContext = weakContext.get();
             if (appContext != null) {
-                for (String fileName : fileNames) {
+                for (int index = 0; index < fileNames.length; index++) {
+                    String fileName = fileNames[index];
                     inputStream = appContext.getAssets().open(fileName);
                     File files = FileUtil.getsExternalFiles();
                     targetFile = new File(files, fileName);
@@ -68,6 +71,8 @@ public class AssetsTask extends AsyncTask<Void, Void, String> {
                         fos.write(buffer, 0, length);
                         fos.flush();
                     }
+
+                    filePaths[index] = targetFile.getAbsolutePath();
                 }
             }
         } catch (IOException e) {
@@ -76,11 +81,11 @@ public class AssetsTask extends AsyncTask<Void, Void, String> {
             ioClose(fos);
             ioClose(inputStream);
         }
-        return targetFile == null? "" : targetFile.getAbsolutePath();
+        return filePaths;
     }
 
     @Override
-    protected void onPostExecute(String s) {
+    protected void onPostExecute(String[] s) {
         super.onPostExecute(s);
         if (callback != null) {
             callback.onSuccess(s);
@@ -88,7 +93,7 @@ public class AssetsTask extends AsyncTask<Void, Void, String> {
     }
 
     public interface Callback {
-        void onSuccess(String filePath);
+        void onSuccess(String[] filePaths);
     }
 
     private void ioClose(Closeable closeable) {

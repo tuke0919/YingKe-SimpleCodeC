@@ -15,11 +15,6 @@ import com.yingke.core.base.BaseActivity;
 import com.yingke.core.util.FileUtil;
 import com.yingke.ffmpeg.assets.AssetsTask;
 
-import java.util.concurrent.Callable;
-
-import bolts.Continuation;
-import bolts.Task;
-
 /**
  * 功能：
  * </p>
@@ -67,8 +62,8 @@ public class Mp4DemuxerActivity extends BaseActivity implements AssetsTask.Callb
 
                 button.setEnabled(false);
 
-                final String h264Path = FileUtil.getsExternalFilesPath() + "/mp4_for_h264_aac.264";
-                final String aacPath = FileUtil.getsExternalFilesPath() + "/mp4_for_h264_aac.aac";
+                final String h264Path = FileUtil.getsExternalFilesPath() + "/h264_for_mp4.264";
+                final String aacPath = FileUtil.getsExternalFilesPath() + "/aac_for_mp4.aac";
 
                 FileUtil.createFile(h264Path);
                 FileUtil.createFile(aacPath);
@@ -115,9 +110,9 @@ public class Mp4DemuxerActivity extends BaseActivity implements AssetsTask.Callb
     }
 
     @Override
-    public void onSuccess(String filePath) {
+    public void onSuccess(String[] filePath) {
         button.setEnabled(true);
-        mp4Path = filePath;
+        mp4Path = filePath[0];
         inputTv.setText("MP4路径：" + mp4Path);
     }
 }
