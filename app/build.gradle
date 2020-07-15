@@ -63,6 +63,8 @@ dependencies {
     implementation project(path: ':ffmpeg-decode-mp4-to-yuv')
     implementation project(path: ':ffmpeg-demuxer-mp4-to-h264-aac')
     implementation project(path: ':ffmpeg-muxer-h264-aac-to-mp4')
+    implementation project(path: ':ffmpeg-decode-mp4-native-player')
+
 
 
 

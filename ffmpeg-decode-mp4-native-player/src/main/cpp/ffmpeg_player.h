@@ -50,7 +50,7 @@ public:
      * @param aNativeWindow
      * @return
      */
-    int native_play(const char * video_path, ANativeWindow *aNativeWindow);
+    int native_play(const char *video_path, ANativeWindow *aNativeWindow);
 };
 
 

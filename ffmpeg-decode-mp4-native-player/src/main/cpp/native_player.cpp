@@ -65,7 +65,7 @@ jint startNativePlayer(JNIEnv *env, jclass clz, jstring videoPath, jobject surfa
         return -1;
     }
     // 封装类
-    NativePlayer nativePlayer = NativePlayer();
+    NativePlayer nativePlayer ;// = NativePlayer()
     nativePlayer.native_play(video_path, window);
 
     env->ReleaseStringUTFChars(videoPath, video_path);

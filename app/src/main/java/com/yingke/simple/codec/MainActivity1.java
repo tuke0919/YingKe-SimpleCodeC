@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 import com.yingke.audio.mp3lame.encoder.LameEncoderActivity;
 import com.yingke.core.base.BaseActivity;
 import com.yingke.decode.mp4.Mp4DecoderActivity;
+import com.yingke.ffmpeg.decode.Mp4NativePlayerActivity;
 import com.yingke.ffmpeg.demuxer.Mp4DemuxerActivity;
 import com.yingke.ffmpeg.muxer.Mp4MuxerActivity;
 
@@ -29,6 +30,7 @@ public class MainActivity1 extends BaseActivity {
     private TextView textView02;
     private TextView textView03;
     private TextView textView04;
+    private TextView textView05;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,6 +46,7 @@ public class MainActivity1 extends BaseActivity {
         textView02 = findViewById(R.id.textView02);
         textView03 = findViewById(R.id.textView03);
         textView04 = findViewById(R.id.textView04);
+        textView05 = findViewById(R.id.textView05);
     }
 
     private void initListener(){
@@ -79,6 +82,13 @@ public class MainActivity1 extends BaseActivity {
             @Override
             public void onClick(View v) {
                 Mp4MuxerActivity.start(MainActivity1.this);
+            }
+        });
+
+        textView05.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Mp4NativePlayerActivity.start(MainActivity1.this);
             }
         });
     }

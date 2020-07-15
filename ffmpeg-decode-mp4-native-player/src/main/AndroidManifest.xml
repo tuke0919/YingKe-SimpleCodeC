@@ -1,2 +1,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.yingke.ffmpeg.decode" />
+    package="com.yingke.ffmpeg.decode" >
+
+
+    <application>
+        <activity
+            android:name=".Mp4NativePlayerActivity"
+            android:label="@string/app_name"
+            />
+    </application>
+
+</manifest>
