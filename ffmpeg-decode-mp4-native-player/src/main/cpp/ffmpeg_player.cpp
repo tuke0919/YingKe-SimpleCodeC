@@ -64,6 +64,7 @@ int NativePlayer::native_play(const char *video_path, ANativeWindow *aNativeWind
     width = avCodecContext->width;
     height = avCodecContext->height;
 
+
     // 11，分配 frame 和packet 空间
     avFrame = av_frame_alloc();
     avPacket = (AVPacket *)av_malloc(sizeof(AVPacket));
