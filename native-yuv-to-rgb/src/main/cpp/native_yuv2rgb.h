@@ -11,6 +11,12 @@ extern "C" {
 
 
 JNIEXPORT void JNICALL yuv2rgb(JNIEnv *env, jclass thiz, jstring yuvPath, jint type, jint width, jint height, jobject surface) ;
+JNIEXPORT void JNICALL rgb2yuv(JNIEnv *env,
+                               jclass thiz,
+                               jstring rgb24Path,
+                               jstring yuv420pPath,
+                               jint width,
+                               jint height);
 
 #ifdef __cplusplus
 }

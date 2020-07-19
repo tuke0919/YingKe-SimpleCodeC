@@ -15,7 +15,8 @@
  * 关联方法
  */
 static JNINativeMethod methods[] = {
-        {"yuv2rgb", "(Ljava/lang/String;IIILandroid/view/Surface;)V", (void *) yuv2rgb}
+        {"yuv2rgb", "(Ljava/lang/String;IIILandroid/view/Surface;)V", (void *) yuv2rgb},
+        {"rgb2yuv", "(Ljava/lang/String;Ljava/lang/String;II)V", (void *) rgb2yuv}
 };
 
 /**
@@ -49,10 +50,12 @@ void ThrowException (JNIEnv *env, char *exception, char * msg ){
 }
 
 enum Type{
+    TYPE_RGB24_TO_YUV20P = -1,
     TYPE_YUV420P_TO_RGB24 = 0,
     TYPE_NV12_TO_RGB24 = 1,
     TYPE_NV21_TO_RGB24 = 2
 };
+
 
 /**
  * YUV420P转RGB24
@@ -64,6 +67,7 @@ enum Type{
  */
 void YUV420P_TO_RGB24(unsigned char *yuv_data, unsigned char *rgb24_data, int width, int height) {
     int index = 0;
+    // y,u,v 分量在内存中 的 开始地址
     unsigned char *y_base = yuv_data;
     unsigned char *u_base = yuv_data + width * height;
     unsigned char *v_base = yuv_data + width * height * 5 / 4;
@@ -97,6 +101,7 @@ void YUV420P_TO_RGB24(unsigned char *yuv_data, unsigned char *rgb24_data, int wi
  */
 void NV12_TO_RGB24(unsigned char *yuv_data, unsigned char *rgb24_data, int width, int height) {
     int index = 0;
+    // y,u,v 分量在内存中 的 开始地址
     unsigned char *y_base = yuv_data;
     unsigned char *u_base = yuv_data + width * height;
 
@@ -128,6 +133,7 @@ void NV12_TO_RGB24(unsigned char *yuv_data, unsigned char *rgb24_data, int width
  */
 void NV21_TO_RGB24(unsigned char *yuv_data, unsigned char *rgb24_data, int width, int height) {
     int index = 0;
+    // y,u,v 分量在内存中 的 开始地址
     unsigned char *y_base = yuv_data;
     unsigned char *u_base = yuv_data + width * height;
 
@@ -157,6 +163,7 @@ void NV21_TO_RGB24(unsigned char *yuv_data, unsigned char *rgb24_data, int width
  * @param buffer
  */
 void drawYUV(const char *yuv_path, int type, int width, int height, ANativeWindow_Buffer buffer) {
+
      // 打开yuv文件
      FILE *yuv_file = fopen(yuv_path, "rb");
      // 分配yuv数据空间
@@ -209,6 +216,7 @@ void drawYUV(const char *yuv_path, int type, int width, int height, ANativeWindo
 }
 
 /**
+ *  yuv 转 rgb
  *
  * @param env
  * @param thiz
@@ -258,7 +266,7 @@ void yuv2rgb(JNIEnv *env,
         return;
     }
 
-    // 重点：
+    // 重点：yuv_path -> yuv_data -> rgb_data -> buffer
     drawYUV(yuv_path, type, width, height, buffer);
 
 
@@ -271,6 +279,123 @@ void yuv2rgb(JNIEnv *env,
     env->ReleaseStringUTFChars(yuvPath, yuv_path);
     // 释放
     ANativeWindow_release(window);
+
+}
+
+
+
+
+unsigned char ClipValue(unsigned char x, unsigned char min_val, unsigned char max_val) {
+    if (x > max_val) {
+        return max_val;
+    } else if (x < min_val) {
+        return min_val;
+    } else {
+        return x;
+    }
+}
+
+
+/**
+ * RGB24 转 YUV420P
+ *
+ * @param rgb24
+ * @param width
+ * @param height
+ * @param yuv420p
+ */
+void RGB24_TO_YUV420P(unsigned char *rgb24, unsigned char *yuv420p, int width, int height) {
+
+    unsigned char *ptrY, *ptrU, *ptrV;
+    memset(yuv420p, 0, width * height * 3 / 2);
+    // Y 开始地址
+    ptrY = yuv420p;
+    // U 开始地址
+    ptrU = yuv420p + width * height;
+    // V 开始地址
+    ptrV = yuv420p + (width * height * 5 / 4);
+    unsigned char y, u, v, r, g, b;
+    int index = 0;
+    // 遍历 rbg图像，每个pix 是3个字节
+    for (int j = 0; j < height; j++) {
+        for (int i = 0; i < width; i++) {
+            // 每个pix 内存位置
+            index = width * j * 3 + i * 3;
+            // r，g，b 分量位置
+            r = rgb24[index];
+            g = rgb24[index + 1];
+            b = rgb24[index + 2];
+            // 每个pix 转化 成 y，u，v
+            y = (unsigned char) ((66 * r + 129 * g + 25 * b + 128) >> 8) + 16;
+            u = (unsigned char) ((-38 * r - 74 * g + 112 * b + 128) >> 8) + 128;
+            v = (unsigned char) ((112 * r - 94 * g - 18 * b + 128) >> 8) + 128;
+
+            // 采样 每个4个y，共用一组u，v分量
+            // 全部y
+            *(ptrY++) = ClipValue(y, 0, 255);
+            if (j % 2 == 0 && i % 2 == 0) {
+                // 偶行列 采样u
+                *(ptrU++) = ClipValue(u, 0, 255);
+            } else if (i % 2 == 0) {
+                // 偶行 采样v
+                *(ptrV++) = ClipValue(v, 0, 255);
+            }
+
+        }
+    }
+}
+
+
+void rgb24_to_yuv420p(const char *rgbPath, const char *yuvPath, int width, int height) {
+    FILE *fp_rgb = fopen(rgbPath, "rb+");
+    FILE *fp_yuv = fopen(yuvPath, "wb+");
+
+    unsigned char *rgb24_data = (unsigned char *) malloc(width * height * 3);
+    unsigned char *yuv420_data = (unsigned char *) malloc(width * height * 3 / 2);
+
+    // 读入rgb24数据
+    fread(rgb24_data, 1, width * height * 3, fp_rgb);
+    // 转换
+    RGB24_TO_YUV420P(rgb24_data, yuv420_data, width, height );
+    // 写入yuv420p
+    fwrite(yuv420_data, 1, width * height * 3 / 2, fp_yuv);
+
+    free(rgb24_data);
+    free(yuv420_data);
+    fclose(fp_rgb);
+    fclose(fp_yuv);
+}
+
+
+
+/**
+ *  yuv 转 rgb
+ *
+ * @param env
+ * @param thiz
+ * @param yuvPath
+ * @param type
+ * @param width
+ * @param height
+ * @param surface
+ */
+void rgb2yuv(JNIEnv *env,
+             jclass thiz,
+             jstring rgb24Path,
+             jstring yuv420pPath,
+             jint width,
+             jint height
+             ) {
+
+    const char *rgb24_path = env->GetStringUTFChars(rgb24Path, NULL);
+    const char *yuv420p_path = env->GetStringUTFChars(yuv420pPath, NULL);
+
+
+    rgb24_to_yuv420p(rgb24_path, yuv420p_path, width, height);
+
+
+    env->ReleaseStringUTFChars(rgb24Path, rgb24_path);
+    env->ReleaseStringUTFChars(yuv420pPath, yuv420p_path);
 
 }
 

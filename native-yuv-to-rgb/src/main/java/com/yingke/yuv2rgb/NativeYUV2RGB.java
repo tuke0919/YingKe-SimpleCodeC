@@ -22,6 +22,7 @@ public class NativeYUV2RGB {
      * 转换类型
      */
     public interface Type {
+        int RGB24_TO_YUV20P = -1;
         int YUV420P_TO_RGB24 = 0;
         int NV12_TO_RGB24 = 1;
         int NV21_TO_RGB24 = 2;
@@ -36,5 +37,14 @@ public class NativeYUV2RGB {
      * @param surface
      */
     public static native void yuv2rgb(String imagePath, int type, int width, int height, Surface surface);
+
+    /**
+     *  rgb 转 yuv 文件
+     * @param rgb24Path
+     * @param yuv420pPath
+     * @param width
+     * @param height
+     */
+    public static native void rgb2yuv(String rgb24Path, String yuv420pPath, int width, int height);
 
 }

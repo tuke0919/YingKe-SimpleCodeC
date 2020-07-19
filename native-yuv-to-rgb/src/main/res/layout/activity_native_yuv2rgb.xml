@@ -5,6 +5,30 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+
+    <Button
+        android:id="@+id/btn_rgb24_yuv420p"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:onClick="onRGB24ToYUV420P"
+        android:text="RGB24转YUV420P" />
+
+    <TextView
+        android:id="@+id/tv_rgb24_yuv420p"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        />
+
+
+    <TextView
+        android:id="@+id/tv_rgb24_yuv420p_path"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        />
+
     <Button
         android:id="@+id/btn_yuv420p"
         android:layout_width="match_parent"
