@@ -12,6 +12,7 @@ import com.yingke.decode.mp4.Mp4DecoderActivity;
 import com.yingke.ffmpeg.decode.Mp4NativePlayerActivity;
 import com.yingke.ffmpeg.demuxer.Mp4DemuxerActivity;
 import com.yingke.ffmpeg.muxer.Mp4MuxerActivity;
+import com.yingke.yuv2rgb.NativeYUV2RGBActivity;
 
 /**
  * 功能：
@@ -31,6 +32,7 @@ public class MainActivity1 extends BaseActivity {
     private TextView textView03;
     private TextView textView04;
     private TextView textView05;
+    private TextView textView06;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,6 +49,7 @@ public class MainActivity1 extends BaseActivity {
         textView03 = findViewById(R.id.textView03);
         textView04 = findViewById(R.id.textView04);
         textView05 = findViewById(R.id.textView05);
+        textView06 = findViewById(R.id.textView06);
     }
 
     private void initListener(){
@@ -89,6 +92,13 @@ public class MainActivity1 extends BaseActivity {
             @Override
             public void onClick(View v) {
                 Mp4NativePlayerActivity.start(MainActivity1.this);
+            }
+        });
+
+        textView06.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NativeYUV2RGBActivity.start(MainActivity1.this);
             }
         });
     }
