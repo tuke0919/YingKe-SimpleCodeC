@@ -18,6 +18,7 @@
             <option value="$PROJECT_DIR$/ffmpeg-muxer-h264-aac-to-mp4" />
             <option value="$PROJECT_DIR$/ffmpeg_assets" />
             <option value="$PROJECT_DIR$/ffmpeg_single" />
+            <option value="$PROJECT_DIR$/native-libyuv" />
             <option value="$PROJECT_DIR$/native-yuv-to-rgb" />
           </set>
         </option>

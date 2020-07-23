@@ -1,4 +1,4 @@
-include ':app', ':ffmpeg-demuxer-mp4-to-h264-aac', ':ffmpeg-muxer-h264-aac-to-mp4', ':ffmpeg-decode-mp4-native-player', ':native-yuv-to-rgb'
+include ':app', ':ffmpeg-demuxer-mp4-to-h264-aac', ':ffmpeg-muxer-h264-aac-to-mp4', ':ffmpeg-decode-mp4-native-player', ':native-yuv-to-rgb', ':native-libyuv'
 include ':ffmpeg-decode-mp4-to-yuv'
 include ':audio_mp3lame_encoder'
 include ':audio_faac_encoder'
