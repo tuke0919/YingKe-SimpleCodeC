@@ -12,6 +12,7 @@ import com.yingke.decode.mp4.Mp4DecoderActivity;
 import com.yingke.ffmpeg.decode.Mp4NativePlayerActivity;
 import com.yingke.ffmpeg.demuxer.Mp4DemuxerActivity;
 import com.yingke.ffmpeg.muxer.Mp4MuxerActivity;
+import com.yingke.libyuv2rgb.LibYUV2RGBActivity;
 import com.yingke.yuv2rgb.NativeYUV2RGBActivity;
 
 /**
@@ -33,6 +34,7 @@ public class MainActivity1 extends BaseActivity {
     private TextView textView04;
     private TextView textView05;
     private TextView textView06;
+    private TextView textView07;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,6 +52,7 @@ public class MainActivity1 extends BaseActivity {
         textView04 = findViewById(R.id.textView04);
         textView05 = findViewById(R.id.textView05);
         textView06 = findViewById(R.id.textView06);
+        textView07 = findViewById(R.id.textView07);
     }
 
     private void initListener(){
@@ -101,5 +104,12 @@ public class MainActivity1 extends BaseActivity {
                 NativeYUV2RGBActivity.start(MainActivity1.this);
             }
         });
+        textView07.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LibYUV2RGBActivity.start(MainActivity1.this);
+            }
+        });
+
     }
 }

@@ -19,6 +19,7 @@
             <option value="$PROJECT_DIR$/ffmpeg_assets" />
             <option value="$PROJECT_DIR$/ffmpeg_single" />
             <option value="$PROJECT_DIR$/native-libyuv" />
+            <option value="$PROJECT_DIR$/native-libyuv-to-rgb" />
             <option value="$PROJECT_DIR$/native-yuv-to-rgb" />
           </set>
         </option>

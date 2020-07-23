@@ -93,7 +93,7 @@ void YUV420P_TO_RGB24(unsigned char *yuv_data, unsigned char *rgb24_data, int wi
  *
  * NV12属于YUV420SP格式
  * NV12转RGB24
- *
+ * YYYYYYYYUVUV
  * @param yuv_data
  * @param rgb24_data
  * @param width

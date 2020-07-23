@@ -8,33 +8,10 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="使用纯代码转换YUV->RGB"
+        android:text="使用LibYuv库转换YUV->RGB"
         android:gravity="center"
         android:layout_marginTop="10dp"
         android:textSize="15dp"
-        />
-
-    <Button
-        android:id="@+id/btn_rgb24_yuv420p"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:enabled="false"
-        android:onClick="onRGB24ToYUV420P"
-        android:text="RGB24转YUV420P" />
-
-    <TextView
-        android:id="@+id/tv_rgb24_yuv420p"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text=""
-        />
-
-
-    <TextView
-        android:id="@+id/tv_rgb24_yuv420p_path"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text=""
         />
 
     <Button
