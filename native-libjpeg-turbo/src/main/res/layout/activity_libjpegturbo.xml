@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/native_yub2rgb_root_layer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="libjpeg-turbo库解压JPEG图像并显示"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:textSize="15dp"
+        />
+
+    <Button
+        android:id="@+id/btn_libjpeg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:onClick="decompile"
+        android:text="libjpeg-turbo-decompile-jpeg" />
+
+    <TextView
+        android:id="@+id/tv_jpeg_path"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        />
+
+</LinearLayout>

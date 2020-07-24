@@ -12,6 +12,7 @@ import com.yingke.decode.mp4.Mp4DecoderActivity;
 import com.yingke.ffmpeg.decode.Mp4NativePlayerActivity;
 import com.yingke.ffmpeg.demuxer.Mp4DemuxerActivity;
 import com.yingke.ffmpeg.muxer.Mp4MuxerActivity;
+import com.yingke.libjpeg.turbo.LibJpegTurboActivity;
 import com.yingke.libyuv2rgb.LibYUV2RGBActivity;
 import com.yingke.yuv2rgb.NativeYUV2RGBActivity;
 
@@ -35,6 +36,7 @@ public class MainActivity1 extends BaseActivity {
     private TextView textView05;
     private TextView textView06;
     private TextView textView07;
+    private TextView textView08;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,6 +55,7 @@ public class MainActivity1 extends BaseActivity {
         textView05 = findViewById(R.id.textView05);
         textView06 = findViewById(R.id.textView06);
         textView07 = findViewById(R.id.textView07);
+        textView08 = findViewById(R.id.textView08);
     }
 
     private void initListener(){
@@ -108,6 +111,13 @@ public class MainActivity1 extends BaseActivity {
             @Override
             public void onClick(View v) {
                 LibYUV2RGBActivity.start(MainActivity1.this);
+            }
+        });
+
+        textView08.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LibJpegTurboActivity.start(MainActivity1.this);
             }
         });
 

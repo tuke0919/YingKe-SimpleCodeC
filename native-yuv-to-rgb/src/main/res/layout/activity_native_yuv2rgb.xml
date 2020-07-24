@@ -8,7 +8,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="使用纯代码转换YUV->RGB"
+        android:text="纯C代码 转换 YUV->RGB"
         android:gravity="center"
         android:layout_marginTop="10dp"
         android:textSize="15dp"
