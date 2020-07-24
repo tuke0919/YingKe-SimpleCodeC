@@ -7,9 +7,13 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -fno-rtti -fno-exceptions -Wa
 
 # 引入三方库
 
+# 获取父路径
+get_filename_component(PARENT_DIR ${CMAKE_SOURCE_DIR} PATH)
+set(LIB_PNG_DIR ${PARENT_DIR}/third-libpng)
+
 # 1, 包含头文件
-include_directories(${CMAKE_SOURCE_DIR}/libs/${ANDROID_ABI}/include_png)
-include_directories(${CMAKE_SOURCE_DIR}/libs/${ANDROID_ABI}/include_zlib)
+include_directories(${LIB_PNG_DIR}/libs/${ANDROID_ABI}/include_png)
+include_directories(${LIB_PNG_DIR}/libs/${ANDROID_ABI}/include_zlib)
 
 # 2，包含so
 add_library(libpng
@@ -18,7 +22,7 @@ add_library(libpng
 
 set_target_properties(libpng
         PROPERTIES IMPORTED_LOCATION
-        ${CMAKE_SOURCE_DIR}/libs/${ANDROID_ABI}/libpng.so
+        ${LIB_PNG_DIR}/libs/${ANDROID_ABI}/libpng.so
         )
 
 add_library(libz
@@ -27,7 +31,7 @@ add_library(libz
 
 set_target_properties(libz
         PROPERTIES IMPORTED_LOCATION
-        ${CMAKE_SOURCE_DIR}/libs/${ANDROID_ABI}/libz.so
+        ${LIB_PNG_DIR}/libs/${ANDROID_ABI}/libz.so
         )
 
 # 生成目标库，链接三方库

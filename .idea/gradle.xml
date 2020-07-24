@@ -18,11 +18,14 @@
             <option value="$PROJECT_DIR$/ffmpeg-muxer-h264-aac-to-mp4" />
             <option value="$PROJECT_DIR$/ffmpeg_assets" />
             <option value="$PROJECT_DIR$/ffmpeg_single" />
-            <option value="$PROJECT_DIR$/native-libjpeg-turbo" />
-            <option value="$PROJECT_DIR$/native-libpng" />
-            <option value="$PROJECT_DIR$/native-libyuv" />
-            <option value="$PROJECT_DIR$/native-libyuv-to-rgb" />
-            <option value="$PROJECT_DIR$/native-yuv-to-rgb" />
+            <option value="$PROJECT_DIR$/image-decode-jpeg-libjpeg-turbo" />
+            <option value="$PROJECT_DIR$/image-decode-png-libpng" />
+            <option value="$PROJECT_DIR$/image-encode-yuv-to-jpeg-png" />
+            <option value="$PROJECT_DIR$/image-transform-yuv-to-rgb" />
+            <option value="$PROJECT_DIR$/image-transfrom-libyuv-to-rgb" />
+            <option value="$PROJECT_DIR$/third-libjpeg-turbo" />
+            <option value="$PROJECT_DIR$/third-libpng" />
+            <option value="$PROJECT_DIR$/third-libyuv" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

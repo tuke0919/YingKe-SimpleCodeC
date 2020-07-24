@@ -7,8 +7,11 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -fno-rtti -fno-exceptions -Wa
 
 # 引入三方库
 
+get_filename_component(PARENT_DIR ${CMAKE_SOURCE_DIR} PATH)
+
+set(LIB_JPEG_TURBO_DIR ${PARENT_DIR}/third-libjpeg-turbo)
 # 1, 包含头文件
-include_directories(${CMAKE_SOURCE_DIR}/libs/${ANDROID_ABI}/include)
+include_directories(${LIB_JPEG_TURBO_DIR}/libs/${ANDROID_ABI}/include_jpeg)
 
 # 2，包含so
 add_library(libjpeg
@@ -17,7 +20,7 @@ add_library(libjpeg
 
 set_target_properties(libjpeg
         PROPERTIES IMPORTED_LOCATION
-        ${CMAKE_SOURCE_DIR}/libs/${ANDROID_ABI}/libjpeg.so
+        ${LIB_JPEG_TURBO_DIR}/libs/${ANDROID_ABI}/libjpeg.so
         )
 
 add_library(libjpeg-turbo
@@ -26,7 +29,7 @@ add_library(libjpeg-turbo
 
 set_target_properties(libjpeg-turbo
         PROPERTIES IMPORTED_LOCATION
-        ${CMAKE_SOURCE_DIR}/libs/${ANDROID_ABI}/libturbojpeg.so
+        ${LIB_JPEG_TURBO_DIR}/libs/${ANDROID_ABI}/libturbojpeg.so
         )
 
 # 生成目标库，链接三方库

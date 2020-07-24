@@ -22,9 +22,9 @@
                 android:layout_height="42dp"
                 android:gravity="center"
                 android:text="开发功能单元测试"
-                android:textColor="#333333"
+                android:textColor="#ff0000"
                 android:textStyle="bold"
-                android:textSize="16sp" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/textView00"
@@ -35,7 +35,8 @@
                 android:textColor="#333333"
                 android:background="@drawable/bg_debug_btn"
                 android:paddingLeft="10dp"
-                android:textSize="16sp"
+                android:textSize="18sp"
+                android:textStyle="bold"
                 android:layout_marginTop="10dp"
                 />
 
@@ -48,7 +49,8 @@
                 android:textColor="#333333"
                 android:background="@drawable/bg_debug_btn"
                 android:paddingLeft="10dp"
-                android:textSize="16sp"
+                android:textSize="18sp"
+                android:textStyle="bold"
                 android:layout_marginTop="10dp"
                 />
 
@@ -61,7 +63,8 @@
                 android:textColor="#333333"
                 android:background="@drawable/bg_debug_btn"
                 android:paddingLeft="10dp"
-                android:textSize="16sp"
+                android:textSize="18sp"
+                android:textStyle="bold"
                 android:layout_marginTop="10dp"/>
 
             <TextView
@@ -73,7 +76,8 @@
                 android:textColor="#333333"
                 android:background="@drawable/bg_debug_btn"
                 android:paddingLeft="10dp"
-                android:textSize="16sp"
+                android:textSize="18sp"
+                android:textStyle="bold"
                 android:layout_marginTop="10dp"/>
 
             <TextView
@@ -85,7 +89,8 @@
                 android:textColor="#333333"
                 android:background="@drawable/bg_debug_btn"
                 android:paddingLeft="10dp"
-                android:textSize="16sp"
+                android:textSize="18sp"
+                android:textStyle="bold"
                 android:layout_marginTop="10dp"/>
 
             <TextView
@@ -97,55 +102,60 @@
                 android:textColor="#333333"
                 android:background="@drawable/bg_debug_btn"
                 android:paddingLeft="10dp"
-                android:textSize="16sp"
+                android:textSize="18sp"
+                android:textStyle="bold"
                 android:layout_marginTop="10dp"/>
 
             <TextView
                 android:id="@+id/textView06"
                 android:layout_width="match_parent"
                 android:layout_height="42dp"
-                android:text="YUV：native-yuv-to-rgb"
+                android:text="YUV：image-transform-yuv-to-rgb"
                 android:gravity="left|center_vertical"
                 android:textColor="#333333"
                 android:background="@drawable/bg_debug_btn"
                 android:paddingLeft="10dp"
-                android:textSize="16sp"
+                android:textSize="18sp"
+                android:textStyle="bold"
                 android:layout_marginTop="10dp"/>
 
             <TextView
                 android:id="@+id/textView07"
                 android:layout_width="match_parent"
                 android:layout_height="42dp"
-                android:text="YUV：native-libyuv-to-rgb"
+                android:text="YUV：image-transform-libyuv-to-rgb"
                 android:gravity="left|center_vertical"
                 android:textColor="#333333"
                 android:background="@drawable/bg_debug_btn"
                 android:paddingLeft="10dp"
-                android:textSize="16sp"
+                android:textSize="18sp"
+                android:textStyle="bold"
                 android:layout_marginTop="10dp"/>
 
             <TextView
                 android:id="@+id/textView08"
                 android:layout_width="match_parent"
                 android:layout_height="42dp"
-                android:text="JPEG：native-libjpeg-turbo"
+                android:text="JPEG：image-decode-jpeg-libjpeg-turbo"
                 android:gravity="left|center_vertical"
                 android:textColor="#333333"
                 android:background="@drawable/bg_debug_btn"
                 android:paddingLeft="10dp"
-                android:textSize="16sp"
+                android:textSize="18sp"
+                android:textStyle="bold"
                 android:layout_marginTop="10dp"/>
 
             <TextView
                 android:id="@+id/textView09"
                 android:layout_width="match_parent"
                 android:layout_height="42dp"
-                android:text="PNG：native-libpng"
+                android:text="PNG：image-decode-png-libpng"
                 android:gravity="left|center_vertical"
                 android:textColor="#333333"
                 android:background="@drawable/bg_debug_btn"
                 android:paddingLeft="10dp"
-                android:textSize="16sp"
+                android:textSize="18sp"
+                android:textStyle="bold"
                 android:layout_marginTop="10dp"/>
 
 

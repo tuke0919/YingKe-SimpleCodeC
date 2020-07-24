@@ -10,7 +10,7 @@ get_filename_component(PARENT_DIR ${CMAKE_SOURCE_DIR} PATH)
 # 引入三方库
 
 # 1, 包含头文件
-set(LIB_YUV_DIR ${PARENT_DIR}/native-libyuv)
+set(LIB_YUV_DIR ${PARENT_DIR}/third-libyuv)
 include_directories(${LIB_YUV_DIR}/libs/${ANDROID_ABI}/include)
 
 # 2，包含so
