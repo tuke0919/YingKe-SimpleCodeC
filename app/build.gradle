@@ -68,6 +68,7 @@ dependencies {
     implementation project(path: ':native-yuv-to-rgb')
     implementation project(path: ':native-libyuv-to-rgb')
     implementation project(path: ':native-libjpeg-turbo')
+    implementation project(path: ':native-libpng')
 
 
 
