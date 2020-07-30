@@ -5,6 +5,9 @@
 #include "yuv_to_jpeg_png_util.h"
 #include "logger.h"
 
+#include "yuv_to_jpeg_util.h"
+#include "yuv_to_png_util.h"
+
 #define NUM_METHODS(x) ((int)(sizeof(x)/ sizeof(x[0])))
 
 
@@ -64,7 +67,13 @@ void ThrowException(JNIEnv *env, const char *exception, const char *message) {
  */
 void yuv2jpeg(JNIEnv *env, jclass thiz, jstring yuvPath, jstring jpegPath, jint width, jint height) {
 
+    const  char * yuv_path  = env->GetStringUTFChars(yuvPath, NULL);
+    const char * jpeg_path = env->GetStringUTFChars(jpegPath, NULL);
 
+    YuvToJpeg::YUV420P_TO_JPEG(yuv_path, jpeg_path, width, height);
+
+    env->ReleaseStringUTFChars(yuvPath, yuv_path);
+    env->ReleaseStringUTFChars(jpegPath, jpeg_path);
 }
 
 
@@ -79,7 +88,13 @@ void yuv2jpeg(JNIEnv *env, jclass thiz, jstring yuvPath, jstring jpegPath, jint 
  */
 void yuv2png(JNIEnv *env, jclass thiz, jstring yuvPath, jstring pngPath, jint width, jint height) {
 
+    const  char * yuv_path  = env->GetStringUTFChars(yuvPath, NULL);
+    const char * png_path = env->GetStringUTFChars(pngPath, NULL);
 
+    YuvToPng::YUV420P_TO_PNG(yuv_path, png_path, width, height);
+
+    env->ReleaseStringUTFChars(yuvPath, yuv_path);
+    env->ReleaseStringUTFChars(pngPath, png_path);
 
 
 

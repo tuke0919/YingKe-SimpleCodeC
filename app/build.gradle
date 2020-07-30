@@ -73,6 +73,7 @@ dependencies {
     implementation project(path: ':image-transfrom-libyuv-to-rgb')
     implementation project(path: ':image-decode-jpeg-libjpeg-turbo')
     implementation project(path: ':image-decode-png-libpng')
+    implementation project(path: ':image-encode-yuv-to-jpeg-png')
 
 
 

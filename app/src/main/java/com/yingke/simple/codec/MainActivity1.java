@@ -16,6 +16,7 @@ import com.yingke.libjpeg.turbo.LibJpegTurboActivity;
 import com.yingke.libpng.LibPngActivity;
 import com.yingke.libyuv2rgb.LibYUV2RGBActivity;
 import com.yingke.yuv2rgb.NativeYUV2RGBActivity;
+import com.yingke.yuvtojpegpng.YuvJpegPngActivity;
 
 /**
  * 功能：
@@ -39,6 +40,7 @@ public class MainActivity1 extends BaseActivity {
     private TextView textView07;
     private TextView textView08;
     private TextView textView09;
+    private TextView textView10;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,6 +61,7 @@ public class MainActivity1 extends BaseActivity {
         textView07 = findViewById(R.id.textView07);
         textView08 = findViewById(R.id.textView08);
         textView09 = findViewById(R.id.textView09);
+        textView10 = findViewById(R.id.textView10);
     }
 
     private void initListener(){
@@ -128,6 +131,13 @@ public class MainActivity1 extends BaseActivity {
             @Override
             public void onClick(View v) {
                 LibPngActivity.start(MainActivity1.this);
+            }
+        });
+
+        textView10.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                YuvJpegPngActivity.start(MainActivity1.this);
             }
         });
 
