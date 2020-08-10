@@ -1,4 +1,4 @@
-package com.yingke.audio.mp3lame.encoder;
+package com.yingke.core.base;
 
 import android.Manifest;
 import android.app.Activity;
@@ -26,10 +26,11 @@ import pub.devrel.easypermissions.EasyPermissions;
  */
 public abstract class BasePermissionActivity extends BaseActivity implements EasyPermissions.PermissionCallbacks {
 
-    private static final String TAG = "BaseActivity";
+    private static final String TAG = "BasePermissionActivity";
 
     protected static final int CODE_REQUEST_AUDIO_RECORD = 0x101;
     protected static final int CODE_REQUEST_STORAGE = 0x103;
+    protected static final int CODE_REQUEST_CAMERA  = 0x104;
 
     private IPermissionResult permissionResult;
 
@@ -52,6 +53,25 @@ public abstract class BasePermissionActivity extends BaseActivity implements Eas
                     CODE_REQUEST_AUDIO_RECORD);
         }
     }
+
+    /**
+     * 请求 相机权限
+     */
+    protected void requestCameraPermission(IPermissionResult cb){
+        this.permissionResult = cb;
+
+        if (EasyPermissions.hasPermissions(this, Manifest.permission.CAMERA)
+                && EasyPermissions.hasPermissions(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+
+            if (permissionResult != null) {
+                permissionResult.granted();
+            }
+        } else {
+            String[] perms = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+            ActivityCompat.requestPermissions(this, perms, CODE_REQUEST_STORAGE);
+        }
+    }
+
 
     /**
      * 获取读写权限

@@ -93,7 +93,7 @@ JPEGEncoder::~JPEGEncoder() {
 }
 
 /**
- * 编码 jpeg
+ * 编码 jpeg-------实际上 仅仅是编码一帧 nv21图像
  * @param nv21Buffer
  * @return
  */

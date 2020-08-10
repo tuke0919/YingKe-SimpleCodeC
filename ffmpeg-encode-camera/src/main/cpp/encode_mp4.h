@@ -35,7 +35,7 @@ protected:
     AVCodecContext *avCodecContext = NULL;
     AVCodec *avCodec = NULL;
     AVStream *avStream = NULL;
-    AVPacket avPacket = NULL;
+    AVPacket avPacket;
     AVFrame *avFrame = NULL;
 
     uint8_t *pFrameBuffer = NULL;

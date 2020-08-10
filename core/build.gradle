@@ -29,4 +29,6 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation rootProject.ext.libraries.androidx_appcompat
     implementation rootProject.ext.libraries.androidx_core
+
+    compileOnly rootProject.ext.libraries.permision_lib
 }

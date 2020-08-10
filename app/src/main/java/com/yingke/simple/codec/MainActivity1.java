@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 import com.yingke.audio.mp3lame.encoder.LameEncoderActivity;
 import com.yingke.core.base.BaseActivity;
 import com.yingke.decode.mp4.Mp4DecoderActivity;
+import com.yingke.encode.camera.EncodeMp4JpegActivity;
 import com.yingke.ffmpeg.decode.Mp4NativePlayerActivity;
 import com.yingke.ffmpeg.demuxer.Mp4DemuxerActivity;
 import com.yingke.ffmpeg.muxer.Mp4MuxerActivity;
@@ -41,6 +42,7 @@ public class MainActivity1 extends BaseActivity {
     private TextView textView08;
     private TextView textView09;
     private TextView textView10;
+    private TextView textView11;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -62,6 +64,7 @@ public class MainActivity1 extends BaseActivity {
         textView08 = findViewById(R.id.textView08);
         textView09 = findViewById(R.id.textView09);
         textView10 = findViewById(R.id.textView10);
+        textView11 = findViewById(R.id.textView11);
     }
 
     private void initListener(){
@@ -138,6 +141,13 @@ public class MainActivity1 extends BaseActivity {
             @Override
             public void onClick(View v) {
                 YuvJpegPngActivity.start(MainActivity1.this);
+            }
+        });
+
+        textView11.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EncodeMp4JpegActivity.start(MainActivity1.this);
             }
         });
 

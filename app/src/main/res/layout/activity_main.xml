@@ -171,6 +171,20 @@
                 android:textStyle="bold"
                 android:layout_marginTop="10dp"/>
 
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:text="视频：ffmpeg-encode-camera-mp4-jpeg"
+                android:gravity="left|center_vertical"
+                android:textColor="#333333"
+                android:background="@drawable/bg_debug_btn"
+                android:paddingLeft="10dp"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"/>
+
+
 
         </LinearLayout>
     </ScrollView>

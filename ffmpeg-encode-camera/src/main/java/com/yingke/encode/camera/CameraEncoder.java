@@ -44,6 +44,6 @@ public class CameraEncoder {
      * @param width
      * @param height
      */
-    public native void encodeJPEG(String jpegPath, int width, int height);
+    public static native void encodeJPEG(String jpegPath, int width, int height);
 
 }

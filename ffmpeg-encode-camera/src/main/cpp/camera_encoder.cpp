@@ -25,7 +25,7 @@ JNI_OnLoad(JavaVM* jvm, void* reserved){
 
     JNIEnv *env = NULL;
     // jvm 获取 jni环境变量
-    if (jvm->GetEnv((void **)(env), JNI_VERSION_1_6) != JNI_OK) {
+    if (jvm->GetEnv((void **)(&env), JNI_VERSION_1_6) != JNI_OK) {
         return -1;
     }
 
@@ -72,7 +72,7 @@ void onPreviewFrame(JNIEnv * jniEnv, jclass thiz, jbyteArray yuvData, jint width
         }
         // 调用析构函数
         delete jpegEncoder;
-        jpegEncoder == NULL;
+        jpegEncoder = NULL;
     }
 }
 
