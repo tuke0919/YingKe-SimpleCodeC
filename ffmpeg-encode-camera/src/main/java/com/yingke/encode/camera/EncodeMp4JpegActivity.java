@@ -80,6 +80,7 @@ public class EncodeMp4JpegActivity extends BasePermissionActivity {
      */
     public void onEncodeMp4(View view) {
         if (!mIsEncodingMp4) {
+            mIsEncodingMp4 = true;
             mBtnEncodeMP4.setEnabled(true);
             mBtnEncodeMP4.setText("停止编码MP4");
             mEncodedMp4 = "";
@@ -88,6 +89,7 @@ public class EncodeMp4JpegActivity extends BasePermissionActivity {
             mEncodedMp4 = FileUtil.getsExternalFiles() + "/" + "camera_" +System.currentTimeMillis() + ".mp4";
             mCameraV1.encodeStart(mEncodedMp4);
         } else {
+            mIsEncodingMp4 = false;
             mBtnEncodeMP4.setEnabled(true);
             mBtnEncodeMP4.setText("Camera编码MP4");
 
