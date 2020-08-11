@@ -23,6 +23,9 @@ bool JPEGEncoder::isTransform() {
  * @param height
  */
 JPEGEncoder::JPEGEncoder(const char *jpegPath, int width, int height) {
+    LOGI("JPEGEncoder");
+    LOGI("jpegPath = %s, width = %d, height = %d", jpegPath, width, height);
+
     this->width = width;
     this->height = height;
     this->jpegPath = jpegPath;
@@ -57,6 +60,7 @@ JPEGEncoder::JPEGEncoder(const char *jpegPath, int width, int height) {
     pCodecCtx->codec_type = AVMEDIA_TYPE_VIDEO;
 
     pCodecCtx->pix_fmt = AV_PIX_FMT_YUVJ420P;
+    // 注意宽高
     pCodecCtx->width  = height;
     pCodecCtx->height = width;
     pCodecCtx->time_base.num = 1;
@@ -77,12 +81,15 @@ JPEGEncoder::JPEGEncoder(const char *jpegPath, int width, int height) {
 
     // 设置 开始转换
     this->transform = true;
+
+    LOGI("开始转换: transform = true");
 }
 
 /**
  * 析构函数
  */
 JPEGEncoder::~JPEGEncoder() {
+    LOGI("~JPEGEncoder");
     // 标记转换结束
     this->transform = false;
 
@@ -98,6 +105,7 @@ JPEGEncoder::~JPEGEncoder() {
  * @return
  */
 int JPEGEncoder::encodeJPEG(unsigned char *nv21Buffer) {
+    LOGI("encodeJPEG");
 
     // 初始化图像帧
     pFrame = av_frame_alloc();
@@ -128,6 +136,8 @@ int JPEGEncoder::encodeJPEG(unsigned char *nv21Buffer) {
     uint8_t *i420_v = out_buffer + width * height * 5 / 4;
 
     //NV21转I420
+    // 前置摄像头，旋转270 libyuv::kRotate270,
+    // 后置摄像头，旋转90
     libyuv::ConvertToI420(nv21Buffer,
             width * height,
             i420_y, height,
@@ -136,8 +146,9 @@ int JPEGEncoder::encodeJPEG(unsigned char *nv21Buffer) {
             0, 0,
             width, height,
             width, height,
-            libyuv::kRotate270,
+            libyuv::kRotate90,
             libyuv::FOURCC_NV21);
+
 
     // 这里可以再作一次镜像翻转,不然你看到的前置相机的图片是反向的
 
@@ -157,6 +168,8 @@ int JPEGEncoder::encodeJPEG(unsigned char *nv21Buffer) {
 
     //9.写文件尾
     av_write_trailer(pFormatCtx);
+
+    LOGI("encodeJPEG: success ");
     return 0;
 }
 

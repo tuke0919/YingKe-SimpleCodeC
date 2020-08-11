@@ -22,6 +22,9 @@ bool Mp4Encoder::isTransform() {
  * @param height
  */
 void Mp4Encoder::initEncoder(const char *mp4Path, int width, int height) {
+    LOGI("initEncoder");
+    LOGI("mp4Path = %s, width = %d, height = %d", mp4Path, width, height);
+
     this->mp4Path = mp4Path;
     this->width  = width;
     this->height = height;
@@ -31,6 +34,7 @@ void Mp4Encoder::initEncoder(const char *mp4Path, int width, int height) {
  * 编码开始
  */
 void Mp4Encoder::encodeStart() {
+    LOGI("encodeStart");
 
     //1. 注册所有组件
     av_register_all();
@@ -95,7 +99,7 @@ void Mp4Encoder::encodeStart() {
             avCodecContext->width,
             avCodecContext->height,
             1);
-    pFrameBuffer = (uint8_t *)(av_malloc(image_buffer_size));
+    pFrameBuffer = (uint8_t*)(av_malloc(image_buffer_size));
     av_image_fill_arrays(avFrame->data,
             avFrame->linesize,
             pFrameBuffer,
@@ -121,7 +125,7 @@ void Mp4Encoder::encodeStart() {
 
     // 标记开始 转换
     this->transform = true;
-
+    LOGI("开始编码: transform = true");
 }
 
 /**
@@ -129,12 +133,15 @@ void Mp4Encoder::encodeStart() {
  * @param nv21Buffer
  */
 void Mp4Encoder::encodeBuffer(unsigned char *nv21Buffer){
+    LOGI("encodeBuffer");
 
     uint8_t *i420_y = pFrameBuffer;
     uint8_t *i420_u = pFrameBuffer + width * height;
     uint8_t *i420_v = pFrameBuffer + width * height * 5 / 4;
 
     // NV21转I420(420P) 并旋转270
+    // 前置摄像头，旋转270 libyuv::kRotate270,
+    // 后置摄像头，旋转90
     libyuv::ConvertToI420(nv21Buffer, width * height,
             i420_y, height,
             i420_u, height / 2,
@@ -142,7 +149,7 @@ void Mp4Encoder::encodeBuffer(unsigned char *nv21Buffer){
             0, 0,
             width, height,
             width, height,
-            libyuv::kRotate270,
+            libyuv::kRotate90,
             libyuv::FOURCC_NV21);
 
     // 赋值给 图像帧结构
@@ -154,7 +161,7 @@ void Mp4Encoder::encodeBuffer(unsigned char *nv21Buffer){
 
     // 编码这一帧图像
     encodeFrame(avCodecContext, avFrame, &avPacket);
-
+    LOGI("encodeBuffer: success ");
 }
 
 /**
@@ -165,6 +172,8 @@ void Mp4Encoder::encodeBuffer(unsigned char *nv21Buffer){
  * @return
  */
 int Mp4Encoder::encodeFrame(AVCodecContext *pCodecCtx, AVFrame *pAvFrame, AVPacket *pAvPacket){
+    LOGI("encodeFrame");
+
     // 向编码器 发送原始 图像帧
     int  ret = avcodec_send_frame(pCodecCtx, pAvFrame);
     if (ret < 0){
@@ -175,6 +184,8 @@ int Mp4Encoder::encodeFrame(AVCodecContext *pCodecCtx, AVFrame *pAvFrame, AVPack
     while (!ret) {
         // 从编码器 获取 编码后的图像帧
         ret = avcodec_receive_packet(pCodecCtx, pAvPacket);
+        LOGI("ret = %d, ret str = %s ", ret, av_err2str(ret));
+
         if (ret == AVERROR(EAGAIN) || ret == AVERROR_EOF) {
             LOGE("receive_packet str = %s", av_err2str(ret));
             return 0;
@@ -182,7 +193,8 @@ int Mp4Encoder::encodeFrame(AVCodecContext *pCodecCtx, AVFrame *pAvFrame, AVPack
             LOGE("error during encoding = %s", av_err2str(ret));
             return -1;
         }
-        printf("Write frame %d, size=%d\n", pAvPacket->pts, pAvPacket->size);
+
+        LOGI("Write packed %d, size=%d ", pAvPacket->pts, pAvPacket->size);
         // packet在stream的位置
         pAvPacket->stream_index = avStream->index;
         // 转换时间域
@@ -193,6 +205,8 @@ int Mp4Encoder::encodeFrame(AVCodecContext *pCodecCtx, AVFrame *pAvFrame, AVPack
         av_interleaved_write_frame(avFormatContext, pAvPacket);
         av_packet_unref(pAvPacket);
     }
+
+    LOGI("encodeFrame: success ");
     return 0;
 }
 
@@ -200,6 +214,7 @@ int Mp4Encoder::encodeFrame(AVCodecContext *pCodecCtx, AVFrame *pAvFrame, AVPack
  * 编码开始
  */
 void Mp4Encoder::encodeStop(){
+    LOGI("encodeStop");
 
     //标记转换结束
     this->transform = false;

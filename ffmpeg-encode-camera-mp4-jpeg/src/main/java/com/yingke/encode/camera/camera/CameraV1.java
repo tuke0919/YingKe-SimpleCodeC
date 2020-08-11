@@ -3,6 +3,7 @@ package com.yingke.encode.camera.camera;
 import android.app.Activity;
 import android.graphics.ImageFormat;
 import android.hardware.Camera;
+import android.util.Log;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -26,7 +27,7 @@ import bolts.Task;
  */
 public class CameraV1 implements IEncoder, SurfaceHolder.Callback, Camera.PreviewCallback {
 
-    private static final String TAG = "CameraV1";
+    private static final String TAG = "Mp4Encoder";
 
     /**
      * 相机实例
@@ -60,7 +61,8 @@ public class CameraV1 implements IEncoder, SurfaceHolder.Callback, Camera.Previe
     @Override
     public void setPreviewView(SurfaceView surfaceView) {
         this.mSurfaceView = surfaceView;
-        this.mCameraId = Camera.CameraInfo.CAMERA_FACING_FRONT;
+//        this.mCameraId = Camera.CameraInfo.CAMERA_FACING_FRONT;
+        this.mCameraId = Camera.CameraInfo.CAMERA_FACING_BACK;
         surfaceView.getHolder().addCallback(this);
     }
 
@@ -70,6 +72,7 @@ public class CameraV1 implements IEncoder, SurfaceHolder.Callback, Camera.Previe
      */
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
+        Log.d(TAG, "surfaceCreated");
         mCamera = openCamera();
     }
 
@@ -81,6 +84,7 @@ public class CameraV1 implements IEncoder, SurfaceHolder.Callback, Camera.Previe
      */
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+        Log.d(TAG, "surfaceChanged");
         try {
             // 设置角度
             setCameraDisplayOrientation(mCameraId, mCamera);
@@ -112,6 +116,7 @@ public class CameraV1 implements IEncoder, SurfaceHolder.Callback, Camera.Previe
      */
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
+        Log.d(TAG, "surfaceDestroyed");
 
         if (mCamera != null) {
             mCamera.setPreviewCallback(null);
@@ -141,7 +146,11 @@ public class CameraV1 implements IEncoder, SurfaceHolder.Callback, Camera.Previe
      */
     @Override
     public void onPreviewFrame(byte[] data, Camera camera) {
+        Log.d(TAG, "onPreviewFrame");
+
         this.mPreviewSize = camera.getParameters().getPreviewSize();
+
+        Log.d(TAG, "mPreviewSize: width = " + this.mPreviewSize.width + " height = " + this.mPreviewSize.height);
 
         // 相机 原始图像数据回调 nv21格式
         CameraEncoder.onPreviewFrame(data, mPreviewSize.width, mPreviewSize.height);
@@ -154,10 +163,10 @@ public class CameraV1 implements IEncoder, SurfaceHolder.Callback, Camera.Previe
      */
     @Override
     public void encodeStart(String outputPath) {
+        Log.d(TAG, "encodeStart: outputPath = " + outputPath);
         if (mPreviewSize != null) {
             CameraEncoder.encodeMp4Start(outputPath, mPreviewSize.width, mPreviewSize.height);
         }
-
     }
 
     /**
@@ -165,6 +174,7 @@ public class CameraV1 implements IEncoder, SurfaceHolder.Callback, Camera.Previe
      */
     @Override
     public void encodeStop() {
+        Log.d(TAG, "encodeStop");
         CameraEncoder.encodeMp4Stop();
     }
 
@@ -175,6 +185,7 @@ public class CameraV1 implements IEncoder, SurfaceHolder.Callback, Camera.Previe
      */
     @Override
     public void encodeJPEG(String jpegPath) {
+        Log.d(TAG, "encodeJPEG: jpegPath = " + jpegPath);
         if (mPreviewSize != null) {
             CameraEncoder.encodeJPEG(jpegPath, mPreviewSize.width, mPreviewSize.height);
         }
@@ -185,6 +196,7 @@ public class CameraV1 implements IEncoder, SurfaceHolder.Callback, Camera.Previe
      */
     @Override
     public void onDestroy() {
+        Log.d(TAG, "onDestroy");
         if (mCamera != null) {
             mCamera.release();
             mCamera = null;
@@ -196,6 +208,7 @@ public class CameraV1 implements IEncoder, SurfaceHolder.Callback, Camera.Previe
      * @return
      */
     private Camera openCamera() {
+        Log.d(TAG, "openCamera");
         Camera camera;
         try {
             camera = Camera.open(mCameraId);
@@ -213,6 +226,8 @@ public class CameraV1 implements IEncoder, SurfaceHolder.Callback, Camera.Previe
      * @param camera
      */
     private void setCameraDisplayOrientation(int cameraId, Camera camera) {
+        Log.d(TAG, "setCameraDisplayOrientation");
+
         Activity targetActivity = (Activity) mSurfaceView.getContext();
         Camera.CameraInfo info = new Camera.CameraInfo();
         Camera.getCameraInfo(cameraId, info);
