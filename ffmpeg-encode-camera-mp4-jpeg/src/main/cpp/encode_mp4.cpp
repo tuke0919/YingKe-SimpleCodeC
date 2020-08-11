@@ -55,7 +55,7 @@ void Mp4Encoder::encodeStart() {
         return;
     }
 
-    //5. 寻找编码器并打开编码器
+    //5. 寻找编码器并打开编码器 mpeg4编码器
     avCodec = avcodec_find_encoder(AV_CODEC_ID_MPEG4);
     if (!avCodec){
         LOGE("could not find encoder");
