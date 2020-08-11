@@ -64,21 +64,41 @@ void Mp4Encoder::encodeStart() {
 
     //6. 分配编码器并设置参数
     avCodecContext = avcodec_alloc_context3(avCodec);
+    // 设置视频编码器ID
     avCodecContext->codec_id = avCodec->id;
+    // 编码器类型
     avCodecContext->codec_type = AVMEDIA_TYPE_VIDEO;
+    // 设置读取像素格式
     avCodecContext->pix_fmt = AV_PIX_FMT_YUV420P;
     // 注意宽高
     avCodecContext->width = height;
     avCodecContext->height = width;
+    // 帧率越大越流畅
     // fps = 25fps
     avCodecContext->time_base.num = 1;
-    avCodecContext->time_base.den = 25;
-    avCodecContext->bit_rate = 400000;
-    avCodecContext->gop_size = 12;
+    avCodecContext->time_base.den = 35;
+
+    // 视频码率的计算方式：视频文件大小/视频时间 码率越大，视频越大
+    // 比特率400kbps
+    avCodecContext->bit_rate = 468000;
+
+    // I帧约少，视频越小。但过分的少，会导致视频编码失败，所以要适量。
+    // gop大小
+    avCodecContext->gop_size = 6;
+
+    // 设置B帧最大值 设置为0，表示不需要B帧
+    avCodecContext->max_b_frames = 0;
+
+    // 设置量化参数（难点，我们一般设置默认值）
+    // 量化系数越小，视频越是清晰。一般情况下都是默认值，最小量化系数默认值是10，最大量化系数默认值是51
+    avCodecContext->qmin = 5;
+    avCodecContext->qmax = 41;
+
+
 
     //将AVCodecContext的成员复制到AVCodecParameters结构体
     avcodec_parameters_from_context(avStream->codecpar, avCodecContext);
-    av_stream_set_r_frame_rate(avStream, {1, 25});
+    av_stream_set_r_frame_rate(avStream, {1, 35});
 
     //7. 打开编码器
     if (avcodec_open2(avCodecContext, avCodec, NULL) < 0){
@@ -112,7 +132,7 @@ void Mp4Encoder::encodeStart() {
 
     //H.264
     if (avCodecContext->codec_id == AV_CODEC_ID_H264) {
-        av_dict_set_int(&opt, "video_track_timescale", 25, 0);
+        av_dict_set_int(&opt, "video_track_timescale", 35, 0);
         av_dict_set(&opt, "preset", "slow", 0);
         av_dict_set(&opt, "tune", "zerolatency", 0);
     }
