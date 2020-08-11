@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/camera_root_layer"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
+
+   <!--  surfaceView  -->
+    <FrameLayout
+        android:id="@+id/surface_view_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </FrameLayout>
 
     <TextView
         android:layout_width="match_parent"
@@ -13,14 +21,35 @@
         android:layout_marginTop="10dp"
         android:textSize="15dp"
         android:layout_marginBottom="10dp"
+        android:textColor="#ff0000"
         />
 
-    <Button
-        android:id="@+id/btn_encode_mp4_start"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="onEncodeMp4"
-        android:text="Camera编码MP4" />
+        android:weightSum="2"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        >
+
+        <Button
+            android:id="@+id/btn_encode_mp4_start"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="onEncodeMp4"
+            android:text="Camera编码MP4" />
+
+        <Button
+            android:id="@+id/btn_encode_jpeg"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="onEncodeJPEG"
+            android:text="Camera编码JPEG" />
+
+    </LinearLayout>
+
 
     <TextView
         android:id="@+id/tv_mp4_path"
@@ -30,14 +59,8 @@
         android:textSize="16dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
+        android:visibility="gone"
         />
-
-    <Button
-        android:id="@+id/btn_encode_jpeg"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="onEncodeJPEG"
-        android:text="Camera编码JPEG" />
 
     <TextView
         android:id="@+id/tv_jpeg_path"
@@ -47,6 +70,7 @@
         android:textSize="16dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
+        android:visibility="gone"
         />
 
-</LinearLayout>
+</RelativeLayout>

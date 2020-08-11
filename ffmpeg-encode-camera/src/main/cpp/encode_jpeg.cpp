@@ -30,10 +30,10 @@ JPEGEncoder::JPEGEncoder(const char *jpegPath, int width, int height) {
     //1.注册所有组件
     av_register_all();
     //2. 初始化输出码流的AVFormatContext
-    avformat_alloc_output_context2(&pFormatCtx, NULL, NULL, jpegPath);
+    avformat_alloc_output_context2(&pFormatCtx, NULL, NULL, this->jpegPath);
 
     //3.打开待输出的视频文件
-    if (avio_open(&pFormatCtx->pb, jpegPath, AVIO_FLAG_READ_WRITE)) {
+    if (avio_open(&pFormatCtx->pb, this->jpegPath, AVIO_FLAG_READ_WRITE)) {
         LOGE("Could not open output file");
         return;
     }
@@ -57,7 +57,7 @@ JPEGEncoder::JPEGEncoder(const char *jpegPath, int width, int height) {
     pCodecCtx->codec_type = AVMEDIA_TYPE_VIDEO;
 
     pCodecCtx->pix_fmt = AV_PIX_FMT_YUVJ420P;
-    pCodecCtx->width = height;
+    pCodecCtx->width  = height;
     pCodecCtx->height = width;
     pCodecCtx->time_base.num = 1;
     pCodecCtx->time_base.den = 25;

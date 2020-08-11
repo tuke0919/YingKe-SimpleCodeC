@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.yingke.core.base.BaseActivity;
 import com.yingke.core.base.BasePermissionActivity;
@@ -61,7 +62,7 @@ public class EncodeMp4JpegActivity extends BasePermissionActivity {
     }
 
     private void setupView() {
-        mRootLayer = (ViewGroup) findViewById(R.id.camera_root_layer);
+        mRootLayer = (ViewGroup) findViewById(R.id.surface_view_layout);
 
         mBtnEncodeMP4 = (Button) findViewById(R.id.btn_encode_mp4_start);
         mTvMp4Path = (TextView) findViewById(R.id.tv_mp4_path);
@@ -107,6 +108,7 @@ public class EncodeMp4JpegActivity extends BasePermissionActivity {
             mEncodedJpeg = FileUtil.getsExternalFiles() + "/" + "camera_" +System.currentTimeMillis() + ".jpeg";
             mCameraV1.encodeJPEG(mEncodedJpeg);
             mTvJpegPath.setText("Jpeg路径：" + mEncodedJpeg);
+            Toast.makeText(this, mTvJpegPath.getText().toString(), Toast.LENGTH_SHORT).show();
         }
     }
 
