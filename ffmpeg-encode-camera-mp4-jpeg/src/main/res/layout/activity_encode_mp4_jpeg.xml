@@ -50,27 +50,4 @@
 
     </LinearLayout>
 
-
-    <TextView
-        android:id="@+id/tv_mp4_path"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:textSize="16dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:visibility="gone"
-        />
-
-    <TextView
-        android:id="@+id/tv_jpeg_path"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:textSize="16dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:visibility="gone"
-        />
-
 </RelativeLayout>

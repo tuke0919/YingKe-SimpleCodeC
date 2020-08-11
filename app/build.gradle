@@ -75,7 +75,7 @@ dependencies {
     implementation project(path: ':image-decode-png-libpng')
     implementation project(path: ':image-encode-yuv-to-jpeg-png')
 
-    implementation project(path: ':ffmpeg-encode-camera')
+    implementation project(path: ':ffmpeg-encode-camera-mp4-jpeg')
 
 
 

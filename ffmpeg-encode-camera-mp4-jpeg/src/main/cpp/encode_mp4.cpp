@@ -63,8 +63,9 @@ void Mp4Encoder::encodeStart() {
     avCodecContext->codec_id = avCodec->id;
     avCodecContext->codec_type = AVMEDIA_TYPE_VIDEO;
     avCodecContext->pix_fmt = AV_PIX_FMT_YUV420P;
-    avCodecContext->width = this->width;
-    avCodecContext->height = this->height;
+    // 注意宽高
+    avCodecContext->width = height;
+    avCodecContext->height = width;
     // fps = 25fps
     avCodecContext->time_base.num = 1;
     avCodecContext->time_base.den = 25;
@@ -90,9 +91,18 @@ void Mp4Encoder::encodeStart() {
     avFrame->height = avCodecContext->height;
     avFrame->format = avCodecContext->pix_fmt;
 
-    int image_buffer_size = av_image_get_buffer_size(avCodecContext->pix_fmt, avCodecContext->width, avCodecContext->height, 1);
+    int image_buffer_size = av_image_get_buffer_size(avCodecContext->pix_fmt,
+            avCodecContext->width,
+            avCodecContext->height,
+            1);
     pFrameBuffer = (uint8_t *)(av_malloc(image_buffer_size));
-    av_image_fill_arrays(avFrame->data, avFrame->linesize, pFrameBuffer, avCodecContext->pix_fmt, avCodecContext->width, avCodecContext->height, 1);
+    av_image_fill_arrays(avFrame->data,
+            avFrame->linesize,
+            pFrameBuffer,
+            avCodecContext->pix_fmt,
+            avCodecContext->width,
+            avCodecContext->height,
+            1);
 
     AVDictionary *opt = 0;
 

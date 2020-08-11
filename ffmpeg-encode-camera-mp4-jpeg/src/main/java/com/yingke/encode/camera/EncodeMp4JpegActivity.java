@@ -1,6 +1,5 @@
 package com.yingke.encode.camera;
 
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,25 +8,17 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.yingke.core.base.BaseActivity;
 import com.yingke.core.base.BasePermissionActivity;
 import com.yingke.core.util.FileUtil;
 import com.yingke.encode.camera.camera.CameraV1;
 
-import java.io.File;
-
 public class EncodeMp4JpegActivity extends BasePermissionActivity {
 
     private ViewGroup mRootLayer;
-
     private Button mBtnEncodeMP4;
-    private TextView mTvMp4Path;
-
     private Button mBtnEncodeJpeg;
-    private TextView mTvJpegPath;
 
     private CameraV1 mCameraV1;
     private SurfaceView mSurfaceView;
@@ -35,7 +26,6 @@ public class EncodeMp4JpegActivity extends BasePermissionActivity {
     private boolean mIsEncodingMp4 = false;
     private String mEncodedMp4;
     private String mEncodedJpeg;
-
 
     public static void start(Context context){
         Intent intent = new Intent(context, EncodeMp4JpegActivity.class);
@@ -65,9 +55,7 @@ public class EncodeMp4JpegActivity extends BasePermissionActivity {
         mRootLayer = (ViewGroup) findViewById(R.id.surface_view_layout);
 
         mBtnEncodeMP4 = (Button) findViewById(R.id.btn_encode_mp4_start);
-        mTvMp4Path = (TextView) findViewById(R.id.tv_mp4_path);
         mBtnEncodeJpeg = (Button) findViewById(R.id.btn_encode_jpeg);
-        mTvJpegPath = (TextView) findViewById(R.id.tv_jpeg_path);
 
         mSurfaceView = new SurfaceView(this);
         mRootLayer.addView(mSurfaceView);
@@ -85,17 +73,19 @@ public class EncodeMp4JpegActivity extends BasePermissionActivity {
             mBtnEncodeMP4.setEnabled(true);
             mBtnEncodeMP4.setText("停止编码MP4");
             mEncodedMp4 = "";
-            mTvMp4Path.setText("");
 
             mEncodedMp4 = FileUtil.getsExternalFiles() + "/" + "camera_" +System.currentTimeMillis() + ".mp4";
             mCameraV1.encodeStart(mEncodedMp4);
+
+            Toast.makeText(this, "开始编码Mp4", Toast.LENGTH_SHORT).show();
+
         } else {
             mIsEncodingMp4 = false;
             mBtnEncodeMP4.setEnabled(true);
             mBtnEncodeMP4.setText("Camera编码MP4");
 
             mCameraV1.encodeStop();
-            mTvMp4Path.setText("Mp4路径：" + mEncodedMp4);
+            Toast.makeText(this, "编码成功：" + mEncodedMp4 , Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -107,8 +97,7 @@ public class EncodeMp4JpegActivity extends BasePermissionActivity {
         if (mCameraV1 != null) {
             mEncodedJpeg = FileUtil.getsExternalFiles() + "/" + "camera_" +System.currentTimeMillis() + ".jpeg";
             mCameraV1.encodeJPEG(mEncodedJpeg);
-            mTvJpegPath.setText("Jpeg路径：" + mEncodedJpeg);
-            Toast.makeText(this, mTvJpegPath.getText().toString(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Jpeg路径：" + mEncodedJpeg, Toast.LENGTH_SHORT).show();
         }
     }
 

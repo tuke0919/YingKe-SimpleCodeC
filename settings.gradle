@@ -1,12 +1,32 @@
-include ':app', ':ffmpeg-demuxer-mp4-to-h264-aac', ':ffmpeg-muxer-h264-aac-to-mp4', ':ffmpeg-decode-mp4-native-player', ':image-transform-yuv-to-rgb', ':third-libyuv', ':image-transfrom-libyuv-to-rgb', ':image-decode-jpeg-libjpeg-turbo', ':image-decode-png-libpng', ':image-encode-yuv-to-jpeg-png', ':third-libjpeg-turbo', ':third-libpng', ':ffmpeg-encode-camera'
-include ':ffmpeg-decode-mp4-to-yuv'
-include ':audio_mp3lame_encoder'
-include ':audio_faac_encoder'
+include ':app'
+
 // 核心组件
 include':core'
 // ffmpeg so
 include ':ffmpeg_single'
 // 资源
 include ':ffmpeg_assets'
+// libjpeg-turbo
+include ':third-libjpeg-turbo'
+// libpng
+include ':third-libpng'
+// libyuv
+include ':third-libyuv'
+
+include ':ffmpeg-demuxer-mp4-to-h264-aac'
+include ':ffmpeg-muxer-h264-aac-to-mp4'
+include ':ffmpeg-decode-mp4-native-player'
+include ':image-transform-yuv-to-rgb'
+
+include ':image-transfrom-libyuv-to-rgb'
+include ':image-decode-jpeg-libjpeg-turbo'
+include ':image-decode-png-libpng'
+include ':image-encode-yuv-to-jpeg-png'
+
+include ':ffmpeg-encode-camera-mp4-jpeg'
+include ':ffmpeg-decode-mp4-to-yuv'
+include ':audio_mp3lame_encoder'
+include ':audio_faac_encoder'
+
 
 rootProject.name='YingKe-SimpleCodeC'
