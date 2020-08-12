@@ -6,6 +6,7 @@ add_library(yingke-camera
         SHARED
         src/main/cpp/camera_encoder.cpp
         src/main/cpp/encode_mp4.cpp
+        src/main/cpp/encode_h264.cpp
         src/main/cpp/encode_jpeg.cpp
         )
 

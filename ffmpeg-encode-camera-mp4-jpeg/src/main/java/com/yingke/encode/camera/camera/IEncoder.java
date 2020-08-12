@@ -21,15 +21,26 @@ public interface IEncoder {
     void setPreviewView(SurfaceView surfaceView);
 
     /**
-     * 编码mp4开始
+     * 编码h264开始
      * @param outputPath
      */
-    void encodeStart(String outputPath);
+    void encodeH264Start(String outputPath);
 
     /**
      * 编码mp4结束
      */
-    void encodeStop();
+    void encodeH264Stop();
+
+    /**
+     * 编码mp4开始
+     * @param outputPath
+     */
+    void encodeMp4Start(String outputPath);
+
+    /**
+     * 编码mp4结束
+     */
+    void encodeMp4Stop();
 
     /**
      * 编码jpeg

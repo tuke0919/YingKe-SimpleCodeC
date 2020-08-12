@@ -39,6 +39,19 @@ public class CameraEncoder {
     public static native void encodeMp4Stop();
 
     /**
+     * 编码 h264 开始
+     * @param h264Path
+     * @param width
+     * @param height
+     */
+    public static native void encodeH264Start(String h264Path, int width, int height);
+
+    /**
+     * 编码 h264 结束
+     */
+    public static native void encodeH264Stop();
+
+    /**
      * 编码 成jpeg
      * @param jpegPath
      * @param width

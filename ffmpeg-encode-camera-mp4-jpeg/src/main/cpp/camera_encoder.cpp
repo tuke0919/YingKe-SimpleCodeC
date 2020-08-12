@@ -4,17 +4,21 @@
 
 #include "camera_encoder.h"
 #include "logger.h"
+//#include "encode_h264.h"
 #include "encode_jpeg.h"
 #include "encode_mp4.h"
+#include "encode_h264.h"
 
 #define NUM_METHODS(x)  ((int)(sizeof(x)/sizeof(x[0])))
 
 
 static JNINativeMethod methods[] = {
-        {"onPreviewFrame", "([BII)V",                 (void *)onPreviewFrame},
-        {"encodeMp4Start", "(Ljava/lang/String;II)V", (void *)encodeMp4Start},
-        {"encodeMp4Stop",  "()V",                     (void *)encodeMp4Stop},
-        {"encodeJPEG",     "(Ljava/lang/String;II)V", (void *)encodeJPEG}
+        {"onPreviewFrame",  "([BII)V",                 (void *)onPreviewFrame},
+        {"encodeMp4Start",  "(Ljava/lang/String;II)V", (void *)encodeMp4Start},
+        {"encodeMp4Stop",   "()V",                     (void *)encodeMp4Stop},
+        {"encodeH264Start", "(Ljava/lang/String;II)V", (void *)encodeH264Start},
+        {"encodeH264Stop",  "()V",                     (void *)encodeH264Stop},
+        {"encodeJPEG",      "(Ljava/lang/String;II)V", (void *)encodeJPEG}
 };
 
 /**
@@ -38,6 +42,9 @@ JNI_OnLoad(JavaVM* jvm, void* reserved){
     return JNI_VERSION_1_6;
 }
 
+
+// h264 编码器
+H264Encoder *h264Encoder = NULL;
 // mp4 编码器
 Mp4Encoder  *mp4Encoder = NULL;
 // jpeg编码器
@@ -54,11 +61,19 @@ JPEGEncoder *jpegEncoder = NULL;
  */
 void onPreviewFrame(JNIEnv * jniEnv, jclass thiz, jbyteArray yuvData, jint width, jint height){
 
-    // 编码视频
+    // 编码 mp4
     if (mp4Encoder != NULL && mp4Encoder->isTransform()) {
         jbyte *nv21Buffer = jniEnv->GetByteArrayElements(yuvData, 0);
         // 编码 nv21帧
         mp4Encoder->encodeBuffer((unsigned char *)(nv21Buffer));
+        jniEnv->ReleaseByteArrayElements(yuvData, nv21Buffer, 0);
+    }
+
+    // 编码 h264
+    if (h264Encoder != NULL && h264Encoder->isTransform()) {
+        jbyte *nv21Buffer = jniEnv->GetByteArrayElements(yuvData, 0);
+        // 编码 nv21帧
+        h264Encoder->encodeBuffer((unsigned char *)(nv21Buffer));
         jniEnv->ReleaseByteArrayElements(yuvData, nv21Buffer, 0);
     }
 
@@ -112,6 +127,45 @@ void encodeMp4Stop(JNIEnv * jniEnv, jclass thiz){
         mp4Encoder = NULL;
     }
 }
+
+
+/**
+ * 编码 H264 开始
+ *
+ * @param jniEnv
+ * @param thiz
+ * @param mp4Path
+ * @param width
+ * @param height
+ */
+void encodeH264Start(JNIEnv *jniEnv, jclass thiz, jstring h264Path, jint width, jint height){
+    const char *h264_path = jniEnv->GetStringUTFChars(h264Path, NULL);
+
+    if (h264Encoder == NULL) {
+        h264Encoder = new H264Encoder();
+    }
+    // 仅实力化，在Preview中 编码
+    h264Encoder->initEncoder(h264_path, width, height);
+    h264Encoder->encodeStart();
+
+    jniEnv->ReleaseStringUTFChars(h264Path, h264_path);
+
+
+}
+
+/**
+ * 编码H264 结束
+ *
+ * @param jniEnv
+ * @param thiz
+ */
+void encodeH264Stop(JNIEnv * jniEnv, jclass thiz){
+    if (NULL != h264Encoder) {
+        h264Encoder->encodeStop();
+        h264Encoder = NULL;
+    }
+}
+
 
 /**
  * 编码 成jpeg

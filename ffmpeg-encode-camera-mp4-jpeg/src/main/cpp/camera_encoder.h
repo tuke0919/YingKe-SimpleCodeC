@@ -22,6 +22,10 @@ extern "C" {
 
     JNIEXPORT void  JNICALL encodeMp4Stop(JNIEnv * jniEnv, jclass thiz);
 
+    JNIEXPORT void  JNICALL encodeH264Start(JNIEnv * jniEnv, jclass thiz, jstring h264Path, jint width, jint height);
+
+    JNIEXPORT void  JNICALL encodeH264Stop(JNIEnv * jniEnv, jclass thiz);
+
     JNIEXPORT void  JNICALL encodeJPEG(JNIEnv * jniEnv, jclass thiz, jstring jpegPath, jint width, jint height);
 
 #ifdef __cplusplus

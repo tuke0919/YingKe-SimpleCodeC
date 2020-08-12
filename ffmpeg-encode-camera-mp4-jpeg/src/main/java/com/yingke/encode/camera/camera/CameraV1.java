@@ -66,7 +66,6 @@ public class CameraV1 implements IEncoder, SurfaceHolder.Callback, Camera.Previe
         surfaceView.getHolder().addCallback(this);
     }
 
-
     /**
      * @param holder The SurfaceHolder whose surface is being created.
      */
@@ -156,14 +155,37 @@ public class CameraV1 implements IEncoder, SurfaceHolder.Callback, Camera.Previe
         CameraEncoder.onPreviewFrame(data, mPreviewSize.width, mPreviewSize.height);
     }
 
+
+    /**
+     * 编码h264开始
+     *
+     * @param outputPath
+     */
+    @Override
+    public void encodeH264Start(String outputPath) {
+        Log.d(TAG, "encodeH264Start: outputPath = " + outputPath);
+        if (mPreviewSize != null) {
+            CameraEncoder.encodeH264Start(outputPath, mPreviewSize.width, mPreviewSize.height);
+        }
+    }
+
+    /**
+     * 编码mp4结束
+     */
+    @Override
+    public void encodeH264Stop() {
+        Log.d(TAG, "encodeH264Stop");
+        CameraEncoder.encodeH264Stop();
+    }
+
     /**
      * 编码mp4开始
      *
      * @param outputPath
      */
     @Override
-    public void encodeStart(String outputPath) {
-        Log.d(TAG, "encodeStart: outputPath = " + outputPath);
+    public void encodeMp4Start(String outputPath) {
+        Log.d(TAG, "encodeMp4Start: outputPath = " + outputPath);
         if (mPreviewSize != null) {
             CameraEncoder.encodeMp4Start(outputPath, mPreviewSize.width, mPreviewSize.height);
         }
@@ -173,8 +195,8 @@ public class CameraV1 implements IEncoder, SurfaceHolder.Callback, Camera.Previe
      * 编码mp4结束
      */
     @Override
-    public void encodeStop() {
-        Log.d(TAG, "encodeStop");
+    public void encodeMp4Stop() {
+        Log.d(TAG, "encodeMp4Stop");
         CameraEncoder.encodeMp4Stop();
     }
 
