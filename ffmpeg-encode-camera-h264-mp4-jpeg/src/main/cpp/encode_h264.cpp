@@ -70,10 +70,10 @@ void H264Encoder::encodeStart() {
     avCodecContext->framerate = (AVRational){fps, 1};
     // 时间基
     avCodecContext->time_base = (AVRational){1, fps};
-    // 比特率
-    avCodecContext->bit_rate = 468000;
+    // 比特率468kbps
+    avCodecContext->bit_rate = 1024000;
     // gop
-    avCodecContext->gop_size = 50;
+    avCodecContext->gop_size = 10;
     // 无b帧
     avCodecContext->max_b_frames = 0;
 

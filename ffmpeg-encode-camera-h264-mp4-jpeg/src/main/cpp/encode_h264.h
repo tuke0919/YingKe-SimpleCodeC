@@ -45,7 +45,7 @@ protected:
     int index = 0;
 
     // 帧率 15fps
-    int fps = 15;
+    int fps = 25;
 
 public:
 

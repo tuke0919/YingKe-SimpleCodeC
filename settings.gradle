@@ -23,7 +23,7 @@ include ':image-decode-jpeg-libjpeg-turbo'
 include ':image-decode-png-libpng'
 include ':image-encode-yuv-to-jpeg-png'
 
-include ':ffmpeg-encode-camera-mp4-jpeg'
+include ':ffmpeg-encode-camera-h264-mp4-jpeg'
 include ':ffmpeg-decode-mp4-to-yuv'
 include ':audio_mp3lame_encoder'
 include ':audio_faac_encoder'
