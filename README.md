@@ -12,7 +12,7 @@ FFmpeg音视频库学习实践，包括
 ## 项目截图
 |||
 |:---:|:---:|
-|![](https://github.com/tuke0919/YingKe-SimpleCodeC/blob/master/snapshot/device-2020-12-07-104125.png)|![](https://github.com/tuke0919/YingKe-SimpleCodeC/blob/master/snapshot/1607311037550.jpg)|
+|![](https://github.com/tuke0919/YingKe-SimpleCodeC/blob/master/snapshot/1607311037550.jpg)|![](https://github.com/tuke0919/YingKe-SimpleCodeC/blob/master/snapshot/1607310537048.jpg)|
 
 
 
