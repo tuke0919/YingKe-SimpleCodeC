@@ -9,6 +9,8 @@ FFmpeg音视频库学习实践，包括
 7. 最后使用libjpeg-turbo和libpng库对原始yuv图像编码成jpeg和png图像
 
 
+## 项目截图
+![](https://github.com/tuke0919/YingKe-SimpleCodeC/blob/master/snapshot/device-2020-12-07-104125.png)
 
 
 
